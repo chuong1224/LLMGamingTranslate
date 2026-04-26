@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="vi" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Translate Books with LLMs</title>
+    <title>Dịch Sách với LLMs</title>
     <link rel="icon" type="image/png" href="/static/TBL-Logo-alpha.png">
 
     <!-- Google Fonts -->
@@ -25,16 +25,16 @@
                 </div>
                 <div class="logo-text">
                     <h2>TBL</h2>
-                    <p>Translate Books with LLMs</p>
+                    <p>Dịch Sách với LLMs</p>
                 </div>
             </div>
 
             <div class="status-section">
                 <div class="status-indicator">
                     <div class="status-dot"></div>
-                    <span id="providerStatusText">LLM: Checking...</span>
+                    <span id="providerStatusText">LLM: Đang kiểm tra...</span>
                 </div>
-                <button class="btn btn-secondary" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle dark/light mode" style="padding: 0.75rem; margin-left: 1rem;">
+                <button class="btn btn-secondary" id="themeToggleBtn" onclick="toggleTheme()" title="Chuyển chế độ tối/sáng" style="padding: 0.75rem; margin-left: 1rem;">
                     <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
                 </button>
             </div>
@@ -46,11 +46,11 @@
                 <!-- Languages Row -->
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
                     <div class="form-group" style="margin-bottom: 0;">
-                        <label>Source Language</label>
+                        <label>Ngôn ngữ nguồn</label>
                         <div class="neu-inset-light">
                             <select class="form-control" id="sourceLang">
-                                <option value="" selected>Auto-detect from file...</option>
-                                <optgroup label="Most Common">
+                                <option value="" selected>Tự động phát hiện từ file...</option>
+                                <optgroup label="Phổ biến nhất">
                                     <option value="English">English</option>
                                     <option value="Chinese">Chinese</option>
                                     <option value="Spanish">Spanish</option>
@@ -62,7 +62,7 @@
                                     <option value="Russian">Russian</option>
                                     <option value="Arabic">Arabic</option>
                                 </optgroup>
-                                <optgroup label="European">
+                                <optgroup label="Châu Âu">
                                     <option value="Italian">Italian</option>
                                     <option value="Dutch">Dutch</option>
                                     <option value="Polish">Polish</option>
@@ -81,7 +81,7 @@
                                     <option value="Ukrainian">Ukrainian</option>
                                     <option value="Catalan">Catalan</option>
                                 </optgroup>
-                                <optgroup label="Asian">
+                                <optgroup label="Châu Á">
                                     <option value="Hindi">Hindi</option>
                                     <option value="Bengali">Bengali</option>
                                     <option value="Urdu">Urdu</option>
@@ -97,28 +97,28 @@
                                     <option value="Tagalog">Tagalog</option>
                                     <option value="Burmese">Burmese</option>
                                 </optgroup>
-                                <optgroup label="Middle East & Africa">
+                                <optgroup label="Trung Đông & Châu Phi">
                                     <option value="Persian">Persian</option>
                                     <option value="Turkish">Turkish</option>
                                     <option value="Hebrew">Hebrew</option>
                                     <option value="Swahili">Swahili</option>
                                     <option value="Amharic">Amharic</option>
                                 </optgroup>
-                                <optgroup label="Custom">
-                                    <option value="Other">Other (Specify)</option>
+                                <optgroup label="Tùy chỉnh">
+                                    <option value="Other">Khác (Nhập thủ công)</option>
                                 </optgroup>
                             </select>
                         </div>
                         <div class="neu-inset-light" style="margin-top: 10px; display: none;" id="customSourceLangContainer">
-                            <input type="text" class="form-control" id="customSourceLang" placeholder="Enter custom source language">
+                            <input type="text" class="form-control" id="customSourceLang" placeholder="Nhập ngôn ngữ nguồn tùy chỉnh">
                         </div>
                     </div>
 
                     <div class="form-group" style="margin-bottom: 0;">
-                        <label>Target Language</label>
+                        <label>Ngôn ngữ đích</label>
                         <div class="neu-inset-light">
                             <select class="form-control" id="targetLang">
-                                <optgroup label="Most Common">
+                                <optgroup label="Phổ biến nhất">
                                     <option value="Chinese">Chinese</option>
                                     <option value="English">English</option>
                                     <option value="Spanish">Spanish</option>
@@ -130,7 +130,7 @@
                                     <option value="Russian">Russian</option>
                                     <option value="Arabic">Arabic</option>
                                 </optgroup>
-                                <optgroup label="European">
+                                <optgroup label="Châu Âu">
                                     <option value="Italian">Italian</option>
                                     <option value="Dutch">Dutch</option>
                                     <option value="Polish">Polish</option>
@@ -149,7 +149,7 @@
                                     <option value="Ukrainian">Ukrainian</option>
                                     <option value="Catalan">Catalan</option>
                                 </optgroup>
-                                <optgroup label="Asian">
+                                <optgroup label="Châu Á">
                                     <option value="Hindi">Hindi</option>
                                     <option value="Bengali">Bengali</option>
                                     <option value="Urdu">Urdu</option>
@@ -165,20 +165,20 @@
                                     <option value="Tagalog">Tagalog</option>
                                     <option value="Burmese">Burmese</option>
                                 </optgroup>
-                                <optgroup label="Middle East & Africa">
+                                <optgroup label="Trung Đông & Châu Phi">
                                     <option value="Persian">Persian</option>
                                     <option value="Turkish">Turkish</option>
                                     <option value="Hebrew">Hebrew</option>
                                     <option value="Swahili">Swahili</option>
                                     <option value="Amharic">Amharic</option>
                                 </optgroup>
-                                <optgroup label="Custom">
-                                    <option value="Other">Other (Specify)</option>
+                                <optgroup label="Tùy chỉnh">
+                                    <option value="Other">Khác (Nhập thủ công)</option>
                                 </optgroup>
                             </select>
                         </div>
                         <div class="neu-inset-light" style="margin-top: 10px; display: none;" id="customTargetLangContainer">
-                            <input type="text" class="form-control" id="customTargetLang" placeholder="Enter custom target language">
+                            <input type="text" class="form-control" id="customTargetLang" placeholder="Nhập ngôn ngữ đích tùy chỉnh">
                         </div>
                     </div>
                 </div>
@@ -188,9 +188,9 @@
                     <div class="upload-icon">
                         <span class="material-symbols-outlined">cloud_upload</span>
                     </div>
-                    <h3>Drop files to translate</h3>
-                    <p>Support for TXT, EPUB, SRT, and DOCX</p>
-                    <div class="browse-btn">Browse Files</div>
+                    <h3>Thả file để dịch</h3>
+                    <p>Hỗ trợ TXT, EPUB, SRT và DOCX</p>
+                    <div class="browse-btn">Chọn File</div>
                     <input type="file" id="fileInput" accept=".txt,.epub,.srt,.docx" style="display: none;" onchange="handleFileSelect(event)" multiple>
                 </div>
 
@@ -198,7 +198,7 @@
                 <div class="prompt-options-toggle" onclick="toggleSettingsOptions()">
                     <span style="display: flex; align-items: center; gap: 0.75rem;">
                         <span class="material-symbols-outlined">tune</span>
-                        <span>Settings</span>
+                        <span>Cài đặt</span>
                     </span>
                     <span id="settingsOptionsIcon" class="material-symbols-outlined">expand_more</span>
                 </div>
@@ -207,7 +207,7 @@
                     <!-- Provider + API Settings Row -->
                     <div id="providerRow" style="display: grid; grid-template-columns: 1fr 2fr; gap: 15px; margin-bottom: 15px; align-items: end;">
                         <div class="form-group" style="margin-bottom: 0;">
-                            <label>AI Provider</label>
+                            <label>Nhà cung cấp AI</label>
                             <div class="neu-inset-light">
                                 <select class="form-control" id="llmProvider">
                                     <option value="ollama">Ollama (Local)</option>
@@ -225,12 +225,12 @@
                         <!-- Ollama Endpoint -->
                         <div class="form-group" id="ollamaSettings" style="margin-bottom: 0;">
                             <label>
-                                API Endpoint
-                                <span id="apiEndpointBadge" class="badge badge-customized" style="display: none; margin-left: 8px; font-size: 0.75rem; background: #f59e0b; color: white; padding: 2px 8px; border-radius: 12px;">custom</span>
+                                Điểm cuối API
+                                <span id="apiEndpointBadge" class="badge badge-customized" style="display: none; margin-left: 8px; font-size: 0.75rem; background: #f59e0b; color: white; padding: 2px 8px; border-radius: 12px;">tùy chỉnh</span>
                             </label>
                             <div class="neu-inset-light" style="display: flex; gap: 8px;">
                                 <input type="text" class="form-control" id="apiEndpoint" value="http://localhost:11434/api/generate" style="flex: 1;">
-                                <button type="button" id="resetApiEndpointBtn" class="btn btn-secondary" style="display: none; padding: 8px 12px; white-space: nowrap;" title="Reset to server configuration">
+                                <button type="button" id="resetApiEndpointBtn" class="btn btn-secondary" style="display: none; padding: 8px 12px; white-space: nowrap;" title="Đặt lại về cấu hình máy chủ">
                                     <span class="material-symbols-outlined" style="font-size: 18px;">restart_alt</span>
                                 </button>
                             </div>
@@ -238,23 +238,23 @@
 
                         <!-- Gemini API Key -->
                         <div class="form-group" id="geminiSettings" style="display: none; margin-bottom: 0;">
-                            <label>API Key <span id="geminiKeyStatus" class="key-status"></span></label>
+                            <label>Khóa API <span id="geminiKeyStatus" class="key-status"></span></label>
                             <div class="neu-inset-light">
-                                <input type="password" class="form-control" id="geminiApiKey" placeholder="Enter Gemini API key" autocomplete="new-password">
+                                <input type="password" class="form-control" id="geminiApiKey" placeholder="Nhập khóa API Gemini" autocomplete="new-password">
                             </div>
                         </div>
 
                         <!-- OpenAI API Key -->
                         <div class="form-group" id="openaiApiKeyGroup" style="display: none; margin-bottom: 0;">
-                            <label>API Key <span id="openaiKeyStatus" class="key-status"></span></label>
+                            <label>Khóa API <span id="openaiKeyStatus" class="key-status"></span></label>
                             <div class="neu-inset-light">
-                                <input type="password" class="form-control" id="openaiApiKey" placeholder="Enter OpenAI API key" autocomplete="new-password">
+                                <input type="password" class="form-control" id="openaiApiKey" placeholder="Nhập khóa API OpenAI" autocomplete="new-password">
                             </div>
                         </div>
 
                         <!-- OpenRouter API Key -->
                         <div class="form-group" id="openrouterSettings" style="display: none; margin-bottom: 0;">
-                            <label>API Key <span id="openrouterKeyStatus" class="key-status"></span></label>
+                            <label>Khóa API <span id="openrouterKeyStatus" class="key-status"></span></label>
                             <div class="neu-inset-light">
                                 <input type="password" class="form-control" id="openrouterApiKey" placeholder="sk-or-v1-..." autocomplete="new-password">
                             </div>
@@ -262,33 +262,33 @@
 
                         <!-- Mistral API Key -->
                         <div class="form-group" id="mistralSettings" style="display: none; margin-bottom: 0;">
-                            <label>API Key <span id="mistralKeyStatus" class="key-status"></span></label>
+                            <label>Khóa API <span id="mistralKeyStatus" class="key-status"></span></label>
                             <div class="neu-inset-light">
-                                <input type="password" class="form-control" id="mistralApiKey" placeholder="Enter Mistral API key" autocomplete="new-password">
+                                <input type="password" class="form-control" id="mistralApiKey" placeholder="Nhập khóa API Mistral" autocomplete="new-password">
                             </div>
                         </div>
 
                         <!-- DeepSeek API Key -->
                         <div class="form-group" id="deepseekSettings" style="display: none; margin-bottom: 0;">
-                            <label>API Key <span id="deepseekKeyStatus" class="key-status"></span></label>
+                            <label>Khóa API <span id="deepseekKeyStatus" class="key-status"></span></label>
                             <div class="neu-inset-light">
-                                <input type="password" class="form-control" id="deepseekApiKey" placeholder="Enter DeepSeek API key" autocomplete="new-password">
+                                <input type="password" class="form-control" id="deepseekApiKey" placeholder="Nhập khóa API DeepSeek" autocomplete="new-password">
                             </div>
                         </div>
 
                         <!-- Poe API Key -->
                         <div class="form-group" id="poeSettings" style="display: none; margin-bottom: 0;">
-                            <label>API Key <span id="poeKeyStatus" class="key-status"></span></label>
+                            <label>Khóa API <span id="poeKeyStatus" class="key-status"></span></label>
                             <div class="neu-inset-light">
-                                <input type="password" class="form-control" id="poeApiKey" placeholder="Get key at poe.com/api_key" autocomplete="new-password">
+                                <input type="password" class="form-control" id="poeApiKey" placeholder="Lấy khóa tại poe.com/api_key" autocomplete="new-password">
                             </div>
                         </div>
 
                         <!-- NVIDIA NIM API Key -->
                         <div class="form-group" id="nimSettings" style="display: none; margin-bottom: 0;">
-                            <label>API Key <span id="nimKeyStatus" class="key-status"></span></label>
+                            <label>Khóa API <span id="nimKeyStatus" class="key-status"></span></label>
                             <div class="neu-inset-light">
-                                <input type="password" class="form-control" id="nimApiKey" placeholder="Get key at build.nvidia.com" autocomplete="new-password">
+                                <input type="password" class="form-control" id="nimApiKey" placeholder="Lấy khóa tại build.nvidia.com" autocomplete="new-password">
                             </div>
                         </div>
                     </div>
@@ -296,10 +296,10 @@
                     <!-- Model Selection Row (Full Width) -->
                     <div style="display: grid; grid-template-columns: 1fr auto; gap: 15px; margin-bottom: 15px; align-items: end;">
                         <div class="form-group" style="margin-bottom: 0;">
-                            <label>Model Selection</label>
+                            <label>Chọn mô hình</label>
                             <div class="neu-inset-light">
                                 <select class="form-control" id="model">
-                                    <option value="">Loading...</option>
+                                    <option value="">Đang tải...</option>
                                 </select>
                             </div>
                             <!-- Thinking model warning -->
@@ -307,7 +307,7 @@
                                 <p id="thinkingModelWarningText" style="margin: 0; font-size: 13px; color: #991b1b; white-space: pre-line;"></p>
                             </div>
                         </div>
-                        <button class="btn btn-secondary" onclick="refreshModels()" title="Refresh model list" style="height: 56px; padding: 0 1rem;">
+                        <button class="btn btn-secondary" onclick="refreshModels()" title="Làm mới danh sách mô hình" style="height: 56px; padding: 0 1rem;">
                             <span class="material-symbols-outlined">refresh</span>
                         </button>
                     </div>
@@ -316,36 +316,36 @@
                     <div id="openaiEndpointRow" style="display: none; margin-bottom: 15px;">
                         <div class="form-group" style="margin-bottom: 0;">
                             <label>
-                                API Endpoint
-                                <span id="openaiEndpointBadge" class="badge badge-customized" style="display: none; margin-left: 8px; font-size: 0.75rem; background: #f59e0b; color: white; padding: 2px 8px; border-radius: 12px;">custom</span>
+                                Điểm cuối API
+                                <span id="openaiEndpointBadge" class="badge badge-customized" style="display: none; margin-left: 8px; font-size: 0.75rem; background: #f59e0b; color: white; padding: 2px 8px; border-radius: 12px;">tùy chỉnh</span>
                             </label>
                             <div class="neu-inset-light" style="display: flex; gap: 8px;">
                                 <input type="text" class="form-control" id="openaiEndpoint" value="https://api.openai.com/v1/chat/completions" placeholder="https://api.openai.com/v1/chat/completions" style="flex: 1;">
-                                <button type="button" id="resetOpenaiEndpointBtn" class="btn btn-secondary" style="display: none; padding: 8px 12px; white-space: nowrap;" title="Reset to server configuration">
+                                <button type="button" id="resetOpenaiEndpointBtn" class="btn btn-secondary" style="display: none; padding: 8px 12px; white-space: nowrap;" title="Đặt lại về cấu hình máy chủ">
                                     <span class="material-symbols-outlined" style="font-size: 18px;">restart_alt</span>
                                 </button>
                             </div>
-                            <small style="color: var(--text-muted-light); font-size: 0.75rem; margin-top: 0.5rem; display: block;">Local servers: llama.cpp (8080), LM Studio (1234), vLLM, etc.</small>
+                            <small style="color: var(--text-muted-light); font-size: 0.75rem; margin-top: 0.5rem; display: block;">Máy chủ cục bộ: llama.cpp (8080), LM Studio (1234), vLLM, v.v.</small>
                         </div>
                     </div>
 
                     <!-- Output Filename Pattern -->
                     <div class="form-group" style="margin-bottom: 15px;">
-                        <label>Naming Convention</label>
+                        <label>Quy tắc đặt tên</label>
                         <div class="neu-inset-light">
-                            <input type="text" class="form-control" id="outputFilenamePattern" value="{originalName} ({targetLang}).{ext}" title="Use {originalName}, {targetLang}, {sourceLang}, {model}, {date}, {datetime}, {ext} as placeholders">
+                            <input type="text" class="form-control" id="outputFilenamePattern" value="{originalName} ({targetLang}).{ext}" title="Dùng {originalName}, {targetLang}, {sourceLang}, {model}, {date}, {datetime}, {ext} làm mẫu thay thế">
                         </div>
-                        <small style="color: var(--text-muted-light); font-size: 0.75rem; margin-top: 0.5rem; display: block;">Placeholders: {originalName}, {targetLang}, {sourceLang}, {model}, {date}, {datetime}, {ext} — Example: {originalName} ({targetLang}) ({model})_{date}.{ext}</small>
+                        <small style="color: var(--text-muted-light); font-size: 0.75rem; margin-top: 0.5rem; display: block;">Mẫu thay thế: {originalName}, {targetLang}, {sourceLang}, {model}, {date}, {datetime}, {ext} — Ví dụ: {originalName} ({targetLang}) ({model})_{date}.{ext}</small>
                     </div>
 
                     <!-- Save Settings Button -->
                     <div class="form-group" style="margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border-color);">
                         <button type="button" id="saveSettingsBtn" class="btn btn-primary" style="width: 100%;" onclick="saveSettings()">
                             <span class="material-symbols-outlined">save</span>
-                            Save Settings to .env
+                            Lưu cài đặt vào .env
                         </button>
                         <p style="margin: 8px 0 15px 0; font-size: 0.8125rem; color: var(--text-muted-light);">
-                            Saves API keys, endpoints, naming convention, and current model as default values in the <code>.env</code> file.
+                            Lưu khóa API, điểm cuối, quy tắc đặt tên và mô hình hiện tại làm giá trị mặc định vào file <code>.env</code>.
                         </p>
                     </div>
                 </div>
@@ -354,7 +354,7 @@
                 <div class="prompt-options-toggle" onclick="togglePromptOptions()">
                     <span style="display: flex; align-items: center; gap: 0.75rem;">
                         <span class="material-symbols-outlined">edit_note</span>
-                        <span>Options</span>
+                        <span>Tùy chọn</span>
                     </span>
                     <span id="promptOptionsIcon" class="material-symbols-outlined">expand_more</span>
                 </div>
@@ -365,9 +365,9 @@
                         <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;">
                             <input type="checkbox" id="refineTranslation">
                             <div>
-                                <span style="font-weight: 600; color: var(--text-dark);">Polish Translation (2nd Pass)</span>
+                                <span style="font-weight: 600; color: var(--text-dark);">Tinh chỉnh bản dịch (Lượt 2)</span>
                                 <p style="margin: 5px 0 0 0; font-size: 0.8125rem; color: var(--text-muted-light);">
-                                    Runs a second refinement pass after translation. The LLM rewrites the first-pass translation to improve literary quality, natural flow, and stylistic elegance. Doubles the translation time but significantly improves output quality.
+                                    Chạy lượt tinh chỉnh thứ hai sau khi dịch. LLM sẽ viết lại bản dịch lượt đầu để cải thiện chất lượng văn học, độ tự nhiên và sự thanh lịch về văn phong. Tăng gấp đôi thời gian dịch nhưng cải thiện đáng kể chất lượng đầu ra.
                                 </p>
                             </div>
                         </label>
@@ -378,9 +378,9 @@
                         <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;">
                             <input type="checkbox" id="bilingualMode">
                             <div>
-                                <span style="font-weight: 600; color: var(--text-dark);">Bilingual Output</span>
+                                <span style="font-weight: 600; color: var(--text-dark);">Xuất song ngữ</span>
                                 <p style="margin: 5px 0 0 0; font-size: 0.8125rem; color: var(--text-muted-light);">
-                                    Include original text alongside the translation. Each chunk displays the source text followed by its translation, ideal for language learning or side-by-side comparison.
+                                    Bao gồm văn bản gốc bên cạnh bản dịch. Mỗi đoạn hiển thị văn bản nguồn kèm theo bản dịch, lý tưởng cho việc học ngoại ngữ hoặc so sánh song song.
                                 </p>
                             </div>
                         </label>
@@ -391,9 +391,9 @@
                         <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;">
                             <input type="checkbox" id="textCleanup">
                             <div>
-                                <span style="font-weight: 600; color: var(--text-dark);">Text Cleanup (OCR Correction)</span>
+                                <span style="font-weight: 600; color: var(--text-dark);">Làm sạch văn bản (Sửa lỗi OCR)</span>
                                 <p style="margin: 5px 0 0 0; font-size: 0.8125rem; color: var(--text-muted-light);">
-                                    For poorly formatted or OCR-scanned texts. Instructs the LLM to fix: broken line breaks, double spaces, punctuation errors, and merge incorrectly split paragraphs.
+                                    Dành cho văn bản định dạng kém hoặc quét OCR. Hướng dẫn LLM sửa: ngắt dòng bị hỏng, khoảng trắng đôi, lỗi dấu câu, và gộp các đoạn bị tách sai.
                                 </p>
                             </div>
                         </label>
@@ -402,29 +402,29 @@
                     <!-- Custom Instructions -->
                     <div class="form-group" style="margin-bottom: 0; margin-top: 15px;">
                         <label style="font-weight: 600; color: var(--text-dark); margin-bottom: 5px; display: block;">
-                            Custom Instructions
+                            Hướng dẫn tùy chỉnh
                         </label>
                         <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 5px;">
                             <select id="customInstructionSelect" class="form-control" style="flex: 1; margin-bottom: 0;">
-                                <option value="">None</option>
+                                <option value="">Không có</option>
                                 <!-- Options populated dynamically via JavaScript -->
                             </select>
-                            <button type="button" id="refreshCustomInstructionsBtn" class="btn btn-sm" style="padding: 6px 10px; background: var(--bg-light); border: 1px solid var(--border-color); border-radius: 6px; cursor: pointer;" title="Refresh list">
+                            <button type="button" id="refreshCustomInstructionsBtn" class="btn btn-sm" style="padding: 6px 10px; background: var(--bg-light); border: 1px solid var(--border-color); border-radius: 6px; cursor: pointer;" title="Làm mới danh sách">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
                             </button>
-                            <button type="button" id="openCustomInstructionsFolderBtn" class="btn btn-sm" style="padding: 6px 10px; background: var(--bg-light); border: 1px solid var(--border-color); border-radius: 6px; cursor: pointer;" title="Open folder">
+                            <button type="button" id="openCustomInstructionsFolderBtn" class="btn btn-sm" style="padding: 6px 10px; background: var(--bg-light); border: 1px solid var(--border-color); border-radius: 6px; cursor: pointer;" title="Mở thư mục">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
                             </button>
                         </div>
                         <p style="margin: 5px 0 0 0; font-size: 0.8125rem; color: var(--text-muted-light);">
-                            Select custom instructions from the <code>Custom_Instructions/</code> folder. You can add your own <code>.txt</code> files to this folder to create new instruction presets. These instructions will be injected into translation and refinement prompts to guide the LLM's behavior (e.g., formal tone, literal translation, etc.).
+                            Chọn hướng dẫn tùy chỉnh từ thư mục <code>Custom_Instructions/</code>. Bạn có thể thêm file <code>.txt</code> của riêng mình vào thư mục này để tạo các mẫu hướng dẫn mới. Các hướng dẫn này sẽ được đưa vào các lệnh dịch và tinh chỉnh để định hướng hành vi của LLM (ví dụ: giọng văn trang trọng, dịch sát nghĩa, v.v.).
                         </p>
                     </div>
                 </div>
 
                 <!-- File Info Section (Batch Files) -->
                 <div id="fileInfo" class="hidden" style="margin-bottom: 20px; margin-top: 20px;">
-                    <h4 style="color: var(--text-dark); font-weight: 700; margin-bottom: 1rem;">Selected Files:</h4>
+                    <h4 style="color: var(--text-dark); font-weight: 700; margin-bottom: 1rem;">File đã chọn:</h4>
                     <ul id="fileListContainer"></ul>
                 </div>
 
@@ -432,11 +432,11 @@
                 <div style="text-align: center; margin-top: 30px; display: flex; justify-content: center; gap: 15px;">
                     <button class="btn btn-primary" id="translateBtn" onclick="startBatchTranslation()" disabled>
                         <span class="material-symbols-outlined">play_circle</span>
-                        Start Translation Batch
+                        Bắt đầu dịch hàng loạt
                     </button>
                     <button class="btn btn-danger hidden" id="interruptBtn" onclick="interruptCurrentTranslation()">
                         <span class="material-symbols-outlined">stop_circle</span>
-                        Interrupt Current & Stop Batch
+                        Ngắt hiện tại & Dừng hàng loạt
                     </button>
                 </div>
 
@@ -447,7 +447,7 @@
                 <div id="progressSection" class="progress-section hidden">
                     <h3 id="currentFileProgressTitle">
                         <span class="material-symbols-outlined">monitoring</span>
-                        Translation Progress
+                        Tiến trình dịch
                     </h3>
                     <div class="progress-bar-container">
                         <div class="progress-bar" id="progressBar" style="width: 0%">0%</div>
@@ -455,23 +455,23 @@
                     <div class="stats-grid" id="statsGrid">
                         <div class="stat-card">
                             <h3 id="totalChunks">0</h3>
-                            <p>Total Chunks</p>
+                            <p>Tổng phân đoạn</p>
                         </div>
                         <div class="stat-card">
                             <h3 id="completedChunks">0</h3>
-                            <p>Completed</p>
+                            <p>Hoàn thành</p>
                         </div>
                         <div class="stat-card">
                             <h3 id="failedChunks">0</h3>
-                            <p>Failed</p>
+                            <p>Thất bại</p>
                         </div>
                         <div class="stat-card">
                             <h3 id="elapsedTime">0s</h3>
-                            <p>Time Elapsed</p>
+                            <p>Thời gian đã qua</p>
                         </div>
                         <div class="stat-card">
                             <h3 id="estimatedTimeRemaining">--</h3>
-                            <p>Est. Remaining</p>
+                            <p>Thời gian còn lại</p>
                         </div>
                     </div>
 
@@ -479,11 +479,11 @@
                     <div class="stats-grid hidden" id="openrouterCostGrid" style="margin-top: 15px;">
                         <div class="stat-card" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 1px solid #f59e0b;">
                             <h3 id="openrouterCost" style="color: #92400e;">$0.0000</h3>
-                            <p style="color: #78350f;">Total Cost (USD)</p>
+                            <p style="color: #78350f;">Tổng chi phí (USD)</p>
                         </div>
                         <div class="stat-card" style="background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border: 1px solid #3b82f6;">
                             <h3 id="openrouterTokens" style="color: #1e40af;">0</h3>
-                            <p style="color: #1e3a8a;">Total Tokens</p>
+                            <p style="color: #1e3a8a;">Tổng tokens</p>
                         </div>
                     </div>
 
@@ -491,11 +491,11 @@
                     <div id="lastTranslationPreviewSection" style="margin-top: 20px; display: block !important;">
                         <h4 style="margin: 0 0 10px 0; color: var(--text-dark); font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
                             <span class="material-symbols-outlined" style="vertical-align: middle; font-size: 1.25rem;">description</span>
-                            Last Translation Preview
+                            Xem trước bản dịch gần nhất
                             <span id="previewLanguages" style="font-weight: 400; font-size: 0.85rem; color: var(--text-muted-light); margin-left: 0.5rem;"></span>
                         </h4>
                         <div class="log-container" id="lastTranslationPreview">
-                            <div style="color: var(--text-muted-light); font-style: italic; padding: 10px;">No translation yet...</div>
+                            <div style="color: var(--text-muted-light); font-style: italic; padding: 10px;">Chưa có bản dịch...</div>
                         </div>
                     </div>
                 </div>
@@ -504,19 +504,19 @@
                 <div id="ttsProgressSection" style="display: none; margin-top: 20px; padding: 15px; background: var(--success-light-bg); border: 1px solid var(--success-light); border-radius: 1.5rem;">
                     <h3 style="margin: 0 0 10px 0; color: var(--success-light); display: flex; align-items: center; gap: 0.5rem;">
                         <span class="material-symbols-outlined">volume_up</span>
-                        Audio Generation
+                        Tạo âm thanh
                     </h3>
                     <div class="progress-bar-container" style="margin-bottom: 10px;">
                         <div class="progress-bar" id="ttsProgressBar" style="width: 0%; background: linear-gradient(90deg, var(--success-light), #22c55e);">0%</div>
                     </div>
-                    <p id="ttsStatusText" style="margin: 0; font-size: 0.875rem; color: var(--success-light);">Waiting to start...</p>
+                    <p id="ttsStatusText" style="margin: 0; font-size: 0.875rem; color: var(--success-light);">Đang chờ bắt đầu...</p>
                 </div>
 
                 <!-- Activity Log (Collapsible) -->
                 <div class="prompt-options-toggle" onclick="toggleActivityLog()" style="margin-top: 30px;">
                     <span style="display: flex; align-items: center; gap: 0.75rem;">
                         <span class="material-symbols-outlined">terminal</span>
-                        <span>Activity Log</span>
+                        <span>Nhật ký hoạt động</span>
                     </span>
                     <span id="activityLogIcon" class="material-symbols-outlined">expand_more</span>
                 </div>
@@ -525,7 +525,7 @@
                     <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
                         <button class="btn btn-secondary" onclick="clearActivityLog()" style="font-size: 0.75rem; padding: 0.5rem 1rem;">
                             <span class="material-symbols-outlined" style="font-size: 1rem;">delete</span>
-                            Clear Log
+                            Xóa nhật ký
                         </button>
                     </div>
                     <div class="log-container" id="logContainer"></div>
@@ -537,8 +537,8 @@
         <div class="main-card" id="resumableJobsSection" style="margin-top: 30px; display: none;">
             <div class="card-header">
                 <span class="material-symbols-outlined">pause_circle</span>
-                <h2>Paused Translations</h2>
-                <button class="btn btn-secondary" onclick="loadResumableJobs()" title="Refresh list" style="margin-left: auto; padding: 0.5rem 1rem;">
+                <h2>Bản dịch đã tạm dừng</h2>
+                <button class="btn btn-secondary" onclick="loadResumableJobs()" title="Làm mới danh sách" style="margin-left: auto; padding: 0.5rem 1rem;">
                     <span class="material-symbols-outlined">refresh</span>
                 </button>
             </div>
@@ -546,7 +546,7 @@
             <div class="card-body">
                 <div id="resumableJobsContainer">
                     <div id="resumableJobsLoading" style="text-align: center; padding: 20px;">
-                        <p>Loading...</p>
+                        <p>Đang tải...</p>
                     </div>
 
                     <div id="resumableJobsList" style="display: none;">
@@ -554,7 +554,7 @@
                     </div>
 
                     <div id="resumableJobsEmpty" style="text-align: center; padding: 40px; display: none;">
-                        <p style="color: var(--text-muted-light);">No paused translations</p>
+                        <p style="color: var(--text-muted-light);">Không có bản dịch đã tạm dừng</p>
                     </div>
                 </div>
             </div>
@@ -564,8 +564,8 @@
         <div class="main-card" style="margin-top: 30px;">
             <div class="card-header">
                 <span class="material-symbols-outlined">folder_open</span>
-                <h2>File Management</h2>
-                <button class="btn btn-secondary" onclick="refreshFileList()" title="Refresh file list" style="margin-left: auto; padding: 0.5rem 1rem;">
+                <h2>Quản lý file</h2>
+                <button class="btn btn-secondary" onclick="refreshFileList()" title="Làm mới danh sách file" style="margin-left: auto; padding: 0.5rem 1rem;">
                     <span class="material-symbols-outlined">refresh</span>
                 </button>
             </div>
@@ -575,20 +575,20 @@
                     <div class="file-actions" style="margin-bottom: 20px; display: flex; gap: 10px;">
                         <button class="btn btn-primary" disabled id="batchDownloadBtn">
                             <span class="material-symbols-outlined">download</span>
-                            Download Selected (Zip)
+                            Tải xuống đã chọn (Zip)
                         </button>
                         <button class="btn btn-danger" disabled id="batchDeleteBtn">
                             <span class="material-symbols-outlined">delete</span>
-                            Delete Selected
+                            Xóa đã chọn
                         </button>
                         <label style="margin-left: auto; display: flex; align-items: center; gap: 5px; cursor: pointer;">
                             <input type="checkbox" id="selectAllFiles">
-                            Select All
+                            Chọn tất cả
                         </label>
                     </div>
 
                     <div id="fileListLoading" style="text-align: center; padding: 20px;">
-                        <p>Loading files...</p>
+                        <p>Đang tải files...</p>
                     </div>
 
                     <div id="fileManagementContainer" style="display: none;">
@@ -596,8 +596,8 @@
                             <thead>
                                 <tr>
                                     <th style="width: 36px;"></th>
-                                    <th>Filename</th>
-                                    <th style="width: 100px; text-align: center;">Actions</th>
+                                    <th>Tên file</th>
+                                    <th style="width: 100px; text-align: center;">Hành động</th>
                                 </tr>
                             </thead>
                             <tbody id="fileTableBody">
@@ -605,13 +605,13 @@
                         </table>
 
                         <div id="fileListEmpty" style="text-align: center; padding: 40px; display: none;">
-                            <p style="color: var(--text-muted-light);">No files found in the translated files directory</p>
+                            <p style="color: var(--text-muted-light);">Không tìm thấy file trong thư mục đã dịch</p>
                         </div>
                     </div>
 
                     <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-light);">
                         <p style="color: var(--text-muted-light); font-size: 0.875rem;">
-                            <strong>Total:</strong> <span id="totalFileCount">0</span> files,
+                            <strong>Tổng:</strong> <span id="totalFileCount">0</span> file,
                             <span id="totalFileSize">0 MB</span>
                         </p>
                     </div>
@@ -627,17 +627,17 @@
                 <span class="material-symbols-outlined">code</span>
                 GitHub
             </a>
-            <a href="https://github.com/hydropix/TranslateBookWithLLM/issues/new" target="_blank" rel="noopener noreferrer" title="Report a bug">
+            <a href="https://github.com/hydropix/TranslateBookWithLLM/issues/new" target="_blank" rel="noopener noreferrer" title="Báo lỗi">
                 <span class="material-symbols-outlined">bug_report</span>
-                Report Bug
+                Báo lỗi
             </a>
-            <a href="https://github.com/hydropix/TranslateBookWithLLM/discussions/new?category=ideas" target="_blank" rel="noopener noreferrer" title="Suggest a feature">
+            <a href="https://github.com/hydropix/TranslateBookWithLLM/discussions/new?category=ideas" target="_blank" rel="noopener noreferrer" title="Đề xuất tính năng">
                 <span class="material-symbols-outlined">lightbulb</span>
-                Suggest Feature
+                Đề xuất tính năng
             </a>
             <a href="https://github.com/sponsors/hydropix" target="_blank" rel="noopener noreferrer" class="sponsor-btn">
                 <span class="material-symbols-outlined">favorite</span>
-                Sponsor
+                Tài trợ
             </a>
         </div>
     </footer>

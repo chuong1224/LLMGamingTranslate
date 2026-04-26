@@ -53,25 +53,25 @@ function formatJobCard(job, hasActiveTranslation, activeNames) {
                         → ${DomHelpers.escapeHtml(outputFilename)}
                     </div>
                     <div style="font-size: 12px; color: #9ca3af; margin-top: 8px;">
-                        Type: ${fileType} ${inputHash ? `• ID: ${inputHash}` : `• ID: ${job.translation_id.replace('trans_', '')}`}
+                        Loại: ${fileType} ${inputHash ? `• ID: ${inputHash}` : `• ID: ${job.translation_id.replace('trans_', '')}`}
                     </div>
                 </div>
 
                 <div style="display: flex; gap: 10px; flex-shrink: 0;">
                     <button class="btn btn-primary" onclick="resumeJob('${job.translation_id}')"
-                            title="${hasActiveTranslation ? '⚠️ Cannot resume: a translation is already in progress' : 'Resume this translation'}"
+                            title="${hasActiveTranslation ? '⚠️ Không thể tiếp tục: đang có bản dịch đang hoạt động' : 'Tiếp tục bản dịch này'}"
                             ${hasActiveTranslation ? 'disabled style="opacity: 0.5; cursor: not-allowed;"' : ''}>
-                        ▶️ Resume
+                        ▶️ Tiếp tục
                     </button>
-                    <button class="btn btn-danger" onclick="deleteCheckpoint('${job.translation_id}')" title="Delete this checkpoint">
-                        🗑️ Delete
+                    <button class="btn btn-danger" onclick="deleteCheckpoint('${job.translation_id}')" title="Xóa checkpoint này">
+                        🗑️ Xóa
                     </button>
                 </div>
             </div>
 
             <div style="margin-bottom: 10px;">
                 <div style="display: flex; justify-content: space-between; font-size: 13px; color: #6b7280; margin-bottom: 5px;">
-                    <span>Progress: ${completedChunks} / ${totalChunks} chunks (${progressPercent}%)</span>
+                    <span>Tiến độ: ${completedChunks} / ${totalChunks} phân đoạn (${progressPercent}%)</span>
                 </div>
                 <div style="width: 100%; background: #e5e7eb; border-radius: 4px; height: 8px; overflow: hidden;">
                     <div style="width: ${progressPercent}%; background: #3b82f6; height: 100%; transition: width 0.3s;"></div>
@@ -79,8 +79,8 @@ function formatJobCard(job, hasActiveTranslation, activeNames) {
             </div>
 
             <div style="display: flex; gap: 20px; font-size: 12px; color: #9ca3af;">
-                <span>Created: ${createdDate}</span>
-                <span>Paused: ${pausedDate}</span>
+                <span>Tạo lúc: ${createdDate}</span>
+                <span>Dừng lúc: ${pausedDate}</span>
             </div>
         </div>
     `;
@@ -101,9 +101,9 @@ function createWarningBanner(activeJobs) {
             <div style="display: flex; align-items: center; gap: 10px;">
                 <span style="font-size: 20px;">⚠️</span>
                 <div style="flex: 1;">
-                    <strong style="color: #92400e;">Active translation in progress</strong>
+                    <strong style="color: #92400e;">Đang có bản dịch hoạt động</strong>
                     <p style="margin: 5px 0 0 0; font-size: 13px; color: #78350f;">
-                        Resume disabled. Active translation(s): ${DomHelpers.escapeHtml(activeNames)}
+                        Tạm thời không thể tiếp tục. Bản dịch đang hoạt động: ${DomHelpers.escapeHtml(activeNames)}
                     </p>
                 </div>
             </div>
@@ -168,7 +168,7 @@ export const ResumeManager = {
             if (loading) loading.style.display = 'none';
             if (emptyMessage) {
                 emptyMessage.style.display = 'block';
-                emptyMessage.innerHTML = `<p style="color: #ef4444;">Error loading: ${DomHelpers.escapeHtml(error.message)}</p>`;
+                emptyMessage.innerHTML = `<p style="color: #ef4444;">Lỗi tải: ${DomHelpers.escapeHtml(error.message)}</p>`;
             }
             // Hide section on error
             if (section) section.style.display = 'none';
@@ -188,24 +188,24 @@ export const ResumeManager = {
         if (hasActive) {
             const activeNames = activeJobs.map(t => t.output_filename || 'Unknown').join(', ');
             MessageLogger.showMessage(
-                `⚠️ Cannot resume: a translation is already in progress (${activeNames}). Please wait for it to finish or interrupt it.`,
+                `⚠️ Không thể tiếp tục: đang có bản dịch hoạt động (${activeNames}). Vui lòng chờ hoàn thành hoặc ngắt nó.`,
                 'error'
             );
             return;
         }
 
-        if (!confirm('Do you want to resume this translation?')) {
+        if (!confirm('Bạn có muốn tiếp tục bản dịch này không?')) {
             return;
         }
 
         try {
             MessageLogger.addLog(`⏯️ Resuming translation ${translationId}...`);
-            MessageLogger.showMessage('Resuming translation...', 'info');
+            MessageLogger.showMessage('Đang tiếp tục bản dịch...', 'info');
 
             const data = await ApiClient.resumeJob(translationId);
 
             MessageLogger.showMessage(
-                `✅ Translation resumed successfully! Resuming from chunk ${data.resume_from_chunk}`,
+                `✅ Đã tiếp tục bản dịch thành công! Tiếp tục từ phân đoạn ${data.resume_from_chunk}`,
                 'success'
             );
             MessageLogger.addLog(`✅ Translation ${translationId} resumed from chunk ${data.resume_from_chunk}`);
@@ -234,7 +234,7 @@ export const ResumeManager = {
 
             // Update title with actual filename
             const fileName = jobData.config?.output_filename || 'resumed translation';
-            DomHelpers.setText('currentFileProgressTitle', `Resuming: ${fileName}`);
+            DomHelpers.setText('currentFileProgressTitle', `Đang tiếp tục: ${fileName}`);
 
             // Show stats grid
             DomHelpers.show('statsGrid');
@@ -265,12 +265,12 @@ export const ResumeManager = {
                     .map(t => `• ${t.output_filename} (${t.status})`)
                     .join('\n');
                 MessageLogger.showMessage(
-                    `⚠️ Cannot resume: a translation is already in progress\n\n${activeList}\n\nPlease wait for it to finish or interrupt the active translation.`,
+                    `⚠️ Không thể tiếp tục: đang có bản dịch hoạt động\n\n${activeList}\n\nVui lòng chờ hoàn thành hoặc ngắt bản dịch đang hoạt động.`,
                     'error'
                 );
                 MessageLogger.addLog(`⚠️ ${error.data.message}`);
             } else {
-                MessageLogger.showMessage(`❌ Error resuming: ${error.message}`, 'error');
+                MessageLogger.showMessage(`❌ Lỗi tiếp tục: ${error.message}`, 'error');
                 MessageLogger.addLog(`❌ Network error: ${error.message}`);
             }
             console.error('Error resuming job:', error);
@@ -282,7 +282,7 @@ export const ResumeManager = {
      * @param {string} translationId - Translation ID to delete
      */
     async deleteCheckpoint(translationId) {
-        if (!confirm('Are you sure you want to delete this checkpoint?\n\nThis action is irreversible and you will lose all progress.')) {
+        if (!confirm('Bạn có chắc muốn xóa checkpoint này?\n\nHành động này không thể hoàn tác và bạn sẽ mất toàn bộ tiến độ.')) {
             return;
         }
 
@@ -291,14 +291,14 @@ export const ResumeManager = {
 
             await ApiClient.deleteCheckpoint(translationId);
 
-            MessageLogger.showMessage('✅ Checkpoint deleted successfully', 'success');
+            MessageLogger.showMessage('✅ Đã xóa checkpoint thành công', 'success');
             MessageLogger.addLog(`✅ Checkpoint ${translationId} deleted`);
 
             // Refresh resumable jobs list
             this.loadResumableJobs();
 
         } catch (error) {
-            MessageLogger.showMessage(`❌ Error deleting checkpoint: ${error.message}`, 'error');
+            MessageLogger.showMessage(`❌ Lỗi xóa checkpoint: ${error.message}`, 'error');
             MessageLogger.addLog(`❌ Network error: ${error.message}`);
             console.error('Error deleting checkpoint:', error);
         }

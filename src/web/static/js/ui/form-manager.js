@@ -454,7 +454,7 @@ export const FormManager = {
 
         } catch (error) {
             console.error('[FormManager] Failed to load default configuration:', error);
-            MessageLogger.showMessage('Failed to load default configuration', 'warning');
+            MessageLogger.showMessage('Không thể tải cấu hình mặc định', 'warning');
             // Still dispatch event even on error so other modules aren't blocked
             console.log('[FormManager] Dispatching defaultConfigLoaded event despite error');
             window.dispatchEvent(new CustomEvent('defaultConfigLoaded'));
@@ -480,7 +480,7 @@ export const FormManager = {
             const currentValue = select.value;
 
             // Reset dropdown to default
-            select.innerHTML = '<option value="">None</option>';
+            select.innerHTML = '<option value="">Không có</option>';
 
             // Populate dropdown with available files
             if (data.files && data.files.length > 0) {
@@ -532,7 +532,7 @@ export const FormManager = {
             const response = await ApiClient.openCustomInstructionsFolder();
             if (!response.success) {
                 console.error('[CustomInstructions] Failed to open folder:', response.error);
-                MessageLogger.addLog('Failed to open Custom_Instructions folder');
+                MessageLogger.addLog('Không thể mở thư mục Custom_Instructions');
             }
         } catch (error) {
             console.error('[CustomInstructions] Error opening folder:', error);
@@ -551,7 +551,7 @@ export const FormManager = {
 
         // First, interrupt current translation if active
         if (currentJob && currentJob.translationId && isBatchActive) {
-            MessageLogger.addLog("🛑 Interrupting current translation before clearing files...");
+            MessageLogger.addLog("🛑 Đang ngắt bản dịch hiện tại trước khi xóa file...");
             try {
                 await ApiClient.interruptTranslation(currentJob.translationId);
             } catch {
@@ -581,7 +581,7 @@ export const FormManager = {
         DomHelpers.hide('progressSection');
 
         // Reset buttons
-        DomHelpers.setText('translateBtn', '▶️ Start Translation Batch');
+        DomHelpers.setText('translateBtn', '▶️ Bắt đầu dịch hàng loạt');
         DomHelpers.setDisabled('translateBtn', true);
         DomHelpers.hide('interruptBtn');
         DomHelpers.setDisabled('interruptBtn', false);
@@ -601,20 +601,20 @@ export const FormManager = {
 
         // Delete uploaded files from server
         if (uploadedFilePaths.length > 0) {
-            MessageLogger.addLog(`🗑️ Deleting ${uploadedFilePaths.length} uploaded file(s) from server...`);
+            MessageLogger.addLog(`🗑️ Đang xóa ${uploadedFilePaths.length} file đã tải lên từ máy chủ...`);
             try {
                 const result = await ApiClient.clearUploads(uploadedFilePaths);
 
-                MessageLogger.addLog(`✅ Successfully deleted ${result.total_deleted} uploaded file(s).`);
+                MessageLogger.addLog(`✅ Đã xóa thành công ${result.total_deleted} file đã tải lên.`);
                 if (result.failed && result.failed.length > 0) {
-                    MessageLogger.addLog(`⚠️ Failed to delete ${result.failed.length} file(s).`);
+                    MessageLogger.addLog(`⚠️ Không thể xóa ${result.failed.length} file.`);
                 }
             } catch {
-                MessageLogger.addLog("⚠️ Error occurred while deleting uploaded files.");
+                MessageLogger.addLog("⚠️ Lỗi xảy ra khi xóa file đã tải lên.");
             }
         }
 
-        MessageLogger.addLog("Form and file list reset.");
+        MessageLogger.addLog("Đã đặt lại biểu mẫu và danh sách file.");
 
         // Trigger UI update
         window.dispatchEvent(new CustomEvent('formReset'));
@@ -705,19 +705,19 @@ export const FormManager = {
         const config = this.getTranslationConfig();
 
         if (!config.source_language) {
-            return { valid: false, message: 'Please specify the source language.' };
+            return { valid: false, message: 'Vui lòng chỉ định ngôn ngữ nguồn.' };
         }
 
         if (!config.target_language) {
-            return { valid: false, message: 'Please specify the target language.' };
+            return { valid: false, message: 'Vui lòng chỉ định ngôn ngữ đích.' };
         }
 
         if (!config.model) {
-            return { valid: false, message: 'Please select an LLM model.' };
+            return { valid: false, message: 'Vui lòng chọn mô hình LLM.' };
         }
 
         if (!config.llm_api_endpoint) {
-            return { valid: false, message: 'API endpoint cannot be empty.' };
+            return { valid: false, message: 'Địa chỉ API không được để trống.' };
         }
 
         // Validate API keys for cloud providers using shared utility

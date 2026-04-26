@@ -140,7 +140,7 @@ export const BatchController = {
         if (!TranslationTracker.isInitialized || !TranslationTracker.isInitialized()) {
             await new Promise(resolve => setTimeout(resolve, 100));
             if (!TranslationTracker.isInitialized || !TranslationTracker.isInitialized()) {
-                MessageLogger.showMessage('⚠️ System still initializing, please wait...', 'warning');
+                MessageLogger.showMessage('⚠️ Hệ thống đang khởi tạo, vui lòng chờ...', 'warning');
                 return;
             }
         }
@@ -155,7 +155,7 @@ export const BatchController = {
         if (sourceLanguageVal === 'Other') {
             sourceLanguageVal = DomHelpers.getValue('customSourceLang').trim();
             if (!sourceLanguageVal) {
-                return earlyValidationFail('Please specify the custom source language for the batch.');
+                return earlyValidationFail('Vui lòng chỉ định ngôn ngữ nguồn tùy chỉnh cho hàng loạt.');
             }
         }
 
@@ -163,20 +163,20 @@ export const BatchController = {
         if (targetLanguageVal === 'Other') {
             targetLanguageVal = DomHelpers.getValue('customTargetLang').trim();
             if (!targetLanguageVal) {
-                return earlyValidationFail('Please specify the custom target language for the batch.');
+                return earlyValidationFail('Vui lòng chỉ định ngôn ngữ đích tùy chỉnh cho hàng loạt.');
             }
         }
 
         const selectedModel = DomHelpers.getValue('model');
         if (!selectedModel) {
-            return earlyValidationFail('Please select an LLM model for the batch.');
+            return earlyValidationFail('Vui lòng chọn mô hình LLM cho hàng loạt.');
         }
 
         const provider = DomHelpers.getValue('llmProvider');
         if (provider === 'ollama') {
             const ollamaApiEndpoint = DomHelpers.getValue('apiEndpoint').trim();
             if (!ollamaApiEndpoint) {
-                return earlyValidationFail('Ollama API Endpoint cannot be empty for the batch.');
+                return earlyValidationFail('Địa chỉ API Ollama không được để trống cho hàng loạt.');
             }
         }
 
@@ -206,7 +206,7 @@ export const BatchController = {
         const translateBtn = DomHelpers.getElement('translateBtn');
         if (translateBtn) {
             translateBtn.disabled = true;
-            translateBtn.innerHTML = '⏳ Batch in Progress...';
+            translateBtn.innerHTML = '⏳ Đang xử lý hàng loạt...';
         }
 
         const interruptBtn = DomHelpers.getElement('interruptBtn');
@@ -215,8 +215,8 @@ export const BatchController = {
             interruptBtn.disabled = false;
         }
 
-        MessageLogger.addLog(`🚀 Batch translation started for ${queuedFilesCount} file(s).`);
-        MessageLogger.showMessage(`Batch of ${queuedFilesCount} file(s) initiated.`, 'info');
+        MessageLogger.addLog(`🚀 Đã bắt đầu dịch hàng loạt cho ${queuedFilesCount} file.`);
+        MessageLogger.showMessage(`Đã khởi động hàng loạt ${queuedFilesCount} file.`, 'info');
 
         // Start processing queue
         this.processNextFileInQueue();
@@ -239,14 +239,14 @@ export const BatchController = {
             const translateBtn = DomHelpers.getElement('translateBtn');
             if (translateBtn) {
                 translateBtn.disabled = filesToProcess.length === 0 || !StatusManager.isConnected();
-                translateBtn.innerHTML = '▶️ Start Translation Batch';
+                translateBtn.innerHTML = '▶️ Bắt đầu dịch hàng loạt';
             }
 
             DomHelpers.hide('interruptBtn');
 
-            MessageLogger.showMessage('✅ Batch translation completed for all files!', 'success');
+            MessageLogger.showMessage('✅ Đã hoàn thành dịch hàng loạt cho tất cả file!', 'success');
             MessageLogger.addLog('🏁 All files in the batch have been processed.');
-            DomHelpers.setText('currentFileProgressTitle', `📊 Batch Completed`);
+            DomHelpers.setText('currentFileProgressTitle', `📊 Hoàn thành hàng loạt`);
             return;
         }
 
@@ -254,7 +254,7 @@ export const BatchController = {
 
         const lastTranslationPreview = DomHelpers.getElement('lastTranslationPreview');
         if (lastTranslationPreview) {
-            lastTranslationPreview.innerHTML = '<div style="color: #6b7280; font-style: italic; padding: 10px;">No translation yet...</div>';
+            lastTranslationPreview.innerHTML = '<div style="color: #6b7280; font-style: italic; padding: 10px;">Chưa có bản dịch...</div>';
         }
 
         if (fileToTranslate.fileType === 'epub') {
@@ -266,7 +266,7 @@ export const BatchController = {
         this.updateTranslationTitle(fileToTranslate);
         ProgressManager.show();
         MessageLogger.addLog(`▶️ Starting translation for: ${fileToTranslate.name} (${fileToTranslate.fileType.toUpperCase()})`);
-        updateFileStatusInList(fileToTranslate.name, 'Preparing...');
+        updateFileStatusInList(fileToTranslate.name, 'Đang chuẩn bị...');
 
         const provider = DomHelpers.getValue('llmProvider');
         const endpoint = provider === 'openai' ? DomHelpers.getValue('openaiEndpoint') : '';
@@ -275,7 +275,7 @@ export const BatchController = {
         if (!apiKeyValidation.valid) {
             MessageLogger.addLog(`❌ Error: ${apiKeyValidation.message}`);
             MessageLogger.showMessage(apiKeyValidation.message, 'error');
-            updateFileStatusInList(fileToTranslate.name, 'Error: Missing API key');
+            updateFileStatusInList(fileToTranslate.name, 'Lỗi: Thiếu khóa API');
             StateManager.setState('translation.currentJob', null);
             this.processNextFileInQueue();
             return;
@@ -284,8 +284,8 @@ export const BatchController = {
         // Validate file path
         if (!fileToTranslate.filePath && !fileToTranslate.content) {
             MessageLogger.addLog(`❌ Critical Error: File ${fileToTranslate.name} has no server path or content`);
-            MessageLogger.showMessage(`Cannot process ${fileToTranslate.name}: file path missing.`, 'error');
-            updateFileStatusInList(fileToTranslate.name, 'Path Error');
+            MessageLogger.showMessage(`Không thể xử lý ${fileToTranslate.name}: thiếu đường dẫn file.`, 'error');
+            updateFileStatusInList(fileToTranslate.name, 'Lỗi đường dẫn');
             StateManager.setState('translation.currentJob', null);
             this.processNextFileInQueue();
             return;
@@ -302,7 +302,7 @@ export const BatchController = {
             });
 
             fileToTranslate.translationId = data.translation_id;
-            updateFileStatusInList(fileToTranslate.name, 'Submitted', data.translation_id);
+            updateFileStatusInList(fileToTranslate.name, 'Đã gửi', data.translation_id);
 
             DomHelpers.show('progressSection');
             DomHelpers.show('interruptBtn');
@@ -323,8 +323,8 @@ export const BatchController = {
 
         } catch (error) {
             MessageLogger.addLog(`❌ Error initiating translation for ${fileToTranslate.name}: ${error.message}`);
-            MessageLogger.showMessage(`Error starting ${fileToTranslate.name}: ${error.message}`, 'error');
-            updateFileStatusInList(fileToTranslate.name, 'Initiation Error');
+            MessageLogger.showMessage(`Lỗi bắt đầu dịch ${fileToTranslate.name}: ${error.message}`, 'error');
+            updateFileStatusInList(fileToTranslate.name, 'Lỗi khởi động');
             StateManager.setState('translation.currentJob', null);
             this.processNextFileInQueue();
         }
@@ -349,7 +349,7 @@ export const BatchController = {
 
         // Add "Translating" text
         const translatingText = document.createElement('div');
-        translatingText.textContent = 'Translating';
+        translatingText.textContent = 'Đang dịch';
         translatingText.style.fontWeight = 'bold';
         mainContainer.appendChild(translatingText);
 
@@ -496,13 +496,13 @@ export const BatchController = {
         const filesToProcess = StateManager.getState('files.toProcess') || [];
         if (translateBtn) {
             translateBtn.disabled = filesToProcess.length === 0 || !StatusManager.isConnected();
-            translateBtn.innerHTML = '▶️ Start Translation Batch';
+            translateBtn.innerHTML = '▶️ Bắt đầu dịch hàng loạt';
         }
 
         DomHelpers.hide('interruptBtn');
 
-        MessageLogger.addLog('⏹️ Batch translation stopped');
-        MessageLogger.showMessage('Batch translation stopped', 'info');
+        MessageLogger.addLog('⏹️ Đã dừng dịch hàng loạt');
+        MessageLogger.showMessage('Đã dừng dịch hàng loạt', 'info');
     },
 
     /**

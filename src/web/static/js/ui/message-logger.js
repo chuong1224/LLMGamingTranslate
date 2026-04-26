@@ -270,7 +270,7 @@ export const MessageLogger = {
         if (logContainer) {
             DomHelpers.clearChildren(logContainer);
             this.resetProgressTracking();
-            this.addLog('📝 Activity log cleared by user');
+            this.addLog('📝 Nhật ký hoạt động đã được xóa bởi người dùng');
         }
     },
 
@@ -474,7 +474,7 @@ export const MessageLogger = {
     resetTranslationPreview() {
         const previewElement = DomHelpers.getElement('lastTranslationPreview');
         if (previewElement) {
-            const placeholderHtml = '<div style="color: #6b7280; font-style: italic; padding: 10px;">No translation yet...</div>';
+            const placeholderHtml = '<div style="color: #6b7280; font-style: italic; padding: 10px;">Chưa có bản dịch...</div>';
             DomHelpers.setHtml(previewElement, placeholderHtml);
         }
         // Clear language indicator

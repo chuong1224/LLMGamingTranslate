@@ -254,7 +254,7 @@ export const FileUpload = {
      */
     async _triggerAutoDetection() {
         if (!lastUploadedFileName) {
-            MessageLogger.showMessage('No file uploaded yet. Upload a file to auto-detect its language.', 'info');
+            MessageLogger.showMessage('Chưa có file nào được tải lên. Tải lên một file để tự động phát hiện ngôn ngữ.', 'info');
             return;
         }
 
@@ -262,12 +262,12 @@ export const FileUpload = {
         const file = filesToProcess.find(f => f.name === lastUploadedFileName);
 
         if (!file) {
-            MessageLogger.showMessage('File not found in queue.', 'error');
+            MessageLogger.showMessage('Không tìm thấy file trong hàng đợi.', 'error');
             return;
         }
 
         if (!file.filePath) {
-            MessageLogger.showMessage('File path not available for language detection.', 'error');
+            MessageLogger.showMessage('Đường dẫn file không khả dụng để phát hiện ngôn ngữ.', 'error');
             return;
         }
 
@@ -276,8 +276,8 @@ export const FileUpload = {
             const success = setLanguageInSelect('sourceLang', file.detectedLanguage);
             if (success) {
                 MessageLogger.showMessage(
-                    `Using previously detected language: ${file.detectedLanguage} ` +
-                    `(${(file.languageConfidence * 100).toFixed(0)}% confidence)`,
+                    `Sử dụng ngôn ngữ đã phát hiện trước: ${file.detectedLanguage} ` +
+                    `(${(file.languageConfidence * 100).toFixed(0)}% độ tin cậy)`,
                     'success'
                 );
             }
@@ -285,7 +285,7 @@ export const FileUpload = {
         }
 
         // Call the API to detect language
-        MessageLogger.showMessage(`Detecting language for ${file.name}...`, 'info');
+        MessageLogger.showMessage(`Đang phát hiện ngôn ngữ cho ${file.name}...`, 'info');
 
         try {
             const result = await ApiClient.detectLanguage(file.filePath);
@@ -302,15 +302,15 @@ export const FileUpload = {
 
                     if (!success) {
                         MessageLogger.showMessage(
-                            `Language detected but not in list: ${result.detected_language}`,
+                            `Phát hiện ngôn ngữ nhưng không có trong danh sách: ${result.detected_language}`,
                             'info'
                         );
                     }
                 } else {
                     MessageLogger.showMessage(
-                        `Low confidence detection: ${result.detected_language} ` +
-                        `(${(result.language_confidence * 100).toFixed(0)}% confidence). ` +
-                        `Please select the source language manually.`,
+                        `Độ tin cậy phát hiện thấp: ${result.detected_language} ` +
+                        `(${(result.language_confidence * 100).toFixed(0)}% độ tin cậy). ` +
+                        `Vui lòng chọn ngôn ngữ nguồn thủ công.`,
                         'warning'
                     );
                 }
@@ -320,10 +320,10 @@ export const FileUpload = {
                 this._saveFileQueue();
                 this.updateFileDisplay();
             } else {
-                MessageLogger.showMessage('Could not detect language from file content.', 'warning');
+                MessageLogger.showMessage('Không thể phát hiện ngôn ngữ từ nội dung file.', 'warning');
             }
         } catch (error) {
-            MessageLogger.showMessage(`Language detection failed: ${error.message}`, 'error');
+            MessageLogger.showMessage(`Phát hiện ngôn ngữ thất bại: ${error.message}`, 'error');
         }
     },
 
@@ -357,7 +357,7 @@ export const FileUpload = {
 
         // Only allow setting as active if file is still Queued
         if (file.status !== 'Queued') {
-            MessageLogger.showMessage(`Cannot edit file '${filename}' - it's already being processed.`, 'info');
+            MessageLogger.showMessage(`Không thể chỉnh sửa file '${filename}' - file đang được xử lý.`, 'info');
             return false;
         }
 
@@ -738,7 +738,7 @@ export const FileUpload = {
 
         // Check for duplicates
         if (filesToProcess.find(f => f.name === file.name)) {
-            MessageLogger.showMessage(`File '${file.name}' is already in the list.`, 'info');
+            MessageLogger.showMessage(`File '${file.name}' đã có trong danh sách.`, 'info');
             return;
         }
 
@@ -748,7 +748,7 @@ export const FileUpload = {
         const outputFilename = generateOutputFilename(file, outputPattern);
         const fileExtension = file.name.split('.').pop().toLowerCase();
 
-        MessageLogger.showMessage(`Uploading file: ${file.name}...`, 'info');
+        MessageLogger.showMessage(`Đang tải lên file: ${file.name}...`, 'info');
 
         try {
             // Upload file using ApiClient
@@ -800,8 +800,8 @@ export const FileUpload = {
 
                     if (!success) {
                         MessageLogger.showMessage(
-                            `File '${file.name}' (${uploadResult.file_type}) uploaded. ` +
-                            `Language detected but not in list: ${uploadResult.detected_language}`,
+                            `Đã tải lên file '${file.name}' (${uploadResult.file_type}). ` +
+                            `Ngôn ngữ phát hiện không có trong danh sách: ${uploadResult.detected_language}`,
                             'info'
                         );
                     }
@@ -810,7 +810,7 @@ export const FileUpload = {
 
         } catch (error) {
             MessageLogger.showMessage(
-                `Failed to upload file '${file.name}': ${error.message}`,
+                `Tải lên file '${file.name}' thất bại: ${error.message}`,
                 'error'
             );
         }
@@ -901,7 +901,7 @@ export const FileUpload = {
                 if (isActiveFile) {
                     const activeBadge = document.createElement('span');
                     activeBadge.className = 'file-active-badge';
-                    activeBadge.innerHTML = '<span class="material-symbols-outlined" style="font-size: 12px;">edit</span> Active';
+                    activeBadge.innerHTML = '<span class="material-symbols-outlined" style="font-size: 12px;">edit</span> Đang chỉnh sửa';
                     infoSpan.appendChild(activeBadge);
                 }
 
@@ -910,7 +910,7 @@ export const FileUpload = {
                 // Remove button
                 const removeBtn = document.createElement('button');
                 removeBtn.className = 'file-remove-btn';
-                removeBtn.title = 'Remove file';
+                removeBtn.title = 'Xóa file';
                 removeBtn.innerHTML = '<span class="material-symbols-outlined">close</span>';
                 removeBtn.onclick = (e) => {
                     e.stopPropagation();

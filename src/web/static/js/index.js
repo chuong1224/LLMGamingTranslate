@@ -80,9 +80,9 @@ function handleTtsUpdate(data) {
                 ttsProgressBar.textContent = '0%';
             }
             if (ttsStatusText) {
-                ttsStatusText.textContent = '🔊 Starting audio generation...';
+                ttsStatusText.textContent = '🔊 Đang bắt đầu tạo âm thanh...';
             }
-            MessageLogger.addLog('🔊 TTS generation started');
+            MessageLogger.addLog('🔊 Đã bắt đầu tạo TTS');
             break;
 
         case 'processing':
@@ -94,7 +94,7 @@ function handleTtsUpdate(data) {
                 const chunkInfo = current_chunk && total_chunks
                     ? ` (${current_chunk}/${total_chunks})`
                     : '';
-                ttsStatusText.textContent = `🔊 ${message || 'Generating audio...'}${chunkInfo}`;
+                ttsStatusText.textContent = `🔊 ${message || 'Đang tạo âm thanh...'}${chunkInfo}`;
             }
             break;
 
@@ -104,9 +104,9 @@ function handleTtsUpdate(data) {
                 ttsProgressBar.textContent = '100%';
             }
             if (ttsStatusText) {
-                ttsStatusText.textContent = `✅ Audio generated: ${audio_filename || 'audio file'}`;
+                ttsStatusText.textContent = `✅ Đã tạo âm thanh: ${audio_filename || 'file âm thanh'}`;
             }
-            MessageLogger.addLog(`✅ TTS completed: ${audio_filename || 'audio file'}`);
+            MessageLogger.addLog(`✅ TTS hoàn thành: ${audio_filename || 'file âm thanh'}`);
 
             // Auto-hide after 5 seconds
             setTimeout(() => {
@@ -119,7 +119,7 @@ function handleTtsUpdate(data) {
         case 'failed':
             if (ttsProgressBar) {
                 ttsProgressBar.style.width = '0%';
-                ttsProgressBar.textContent = 'Failed';
+                ttsProgressBar.textContent = 'Thất bại';
                 ttsProgressBar.style.background = '#ef4444';
             }
 
@@ -130,25 +130,25 @@ function handleTtsUpdate(data) {
                 if (isFFmpegError) {
                     // Show FFmpeg install button instead of long instructions
                     ttsStatusText.innerHTML = `
-                        <span style="color: #ef4444;">❌ FFmpeg is required for audio encoding</span>
+                        <span style="color: #ef4444;">❌ Cần FFmpeg để mã hóa âm thanh</span>
                         <div style="margin-top: 10px;">
                             <button id="installFFmpegBtn" class="btn btn-primary" style="margin-right: 10px;" onclick="window.installFFmpeg()">
                                 <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: middle;">download</span>
-                                Install FFmpeg (winget)
+                                Cài đặt FFmpeg (winget)
                             </button>
                             <a href="https://ffmpeg.org/download.html" target="_blank" class="btn btn-secondary" style="text-decoration: none;">
-                                Manual Download
+                                Tải thủ công
                             </a>
                         </div>
                         <p style="margin-top: 8px; font-size: 0.8rem; color: var(--text-secondary);">
-                            After installation, restart the application.
+                            Sau khi cài đặt, khởi động lại ứng dụng.
                         </p>
                     `;
                 } else {
-                    ttsStatusText.textContent = `❌ TTS failed: ${errorText}`;
+                    ttsStatusText.textContent = `❌ TTS thất bại: ${errorText}`;
                 }
             }
-            MessageLogger.addLog(`❌ TTS failed: ${errorText}`);
+            MessageLogger.addLog(`❌ TTS thất bại: ${errorText}`);
             break;
     }
 }
@@ -164,7 +164,7 @@ window.installFFmpeg = async function() {
         btn.disabled = true;
         btn.innerHTML = `
             <span class="material-symbols-outlined rotating" style="font-size: 18px; vertical-align: middle;">sync</span>
-            Installing...
+            Đang cài đặt...
         `;
     }
 
@@ -177,36 +177,36 @@ window.installFFmpeg = async function() {
                 ttsStatusText.innerHTML = `
                     <span style="color: #22c55e;">✅ ${result.message}</span>
                     <p style="margin-top: 8px; font-size: 0.8rem; color: var(--text-secondary);">
-                        Please restart the application to use TTS.
+                        Vui lòng khởi động lại ứng dụng để sử dụng TTS.
                     </p>
                 `;
             }
-            MessageLogger.addLog('✅ FFmpeg installed successfully');
+            MessageLogger.addLog('✅ FFmpeg đã cài đặt thành công');
         } else {
             if (ttsStatusText) {
                 ttsStatusText.innerHTML = `
-                    <span style="color: #ef4444;">❌ Installation failed: ${result.error}</span>
+                    <span style="color: #ef4444;">❌ Cài đặt thất bại: ${result.error}</span>
                     <div style="margin-top: 10px;">
                         <a href="https://ffmpeg.org/download.html" target="_blank" class="btn btn-secondary" style="text-decoration: none;">
-                            Manual Download
+                            Tải thủ công
                         </a>
                     </div>
                 `;
             }
-            MessageLogger.addLog(`❌ FFmpeg installation failed: ${result.error}`);
+            MessageLogger.addLog(`❌ Cài đặt FFmpeg thất bại: ${result.error}`);
         }
     } catch (err) {
         if (ttsStatusText) {
             ttsStatusText.innerHTML = `
-                <span style="color: #ef4444;">❌ Installation error: ${err.message}</span>
+                <span style="color: #ef4444;">❌ Lỗi cài đặt: ${err.message}</span>
                 <div style="margin-top: 10px;">
                     <a href="https://ffmpeg.org/download.html" target="_blank" class="btn btn-secondary" style="text-decoration: none;">
-                        Manual Download
+                        Tải thủ công
                     </a>
                 </div>
             `;
         }
-        MessageLogger.addLog(`❌ FFmpeg installation error: ${err.message}`);
+        MessageLogger.addLog(`❌ Lỗi cài đặt FFmpeg: ${err.message}`);
     }
 }
 
@@ -429,7 +429,7 @@ window.resetFiles = () => {
     if (fileListContainer) {
         fileListContainer.innerHTML = '';
     }
-    MessageLogger.showMessage('File list cleared', 'info');
+    MessageLogger.showMessage('Đã xóa danh sách file', 'info');
 };
 
 // Form Manager
@@ -445,25 +445,25 @@ window.startBatchTranslation = BatchController.startBatchTranslation.bind(BatchC
 window.interruptCurrentTranslation = async () => {
     const currentJob = StateManager.getState('translation.currentJob');
     if (!currentJob) {
-        MessageLogger.showMessage('No active translation to interrupt', 'info');
+        MessageLogger.showMessage('Không có bản dịch đang hoạt động để ngắt', 'info');
         return;
     }
 
     const interruptBtn = DomHelpers.getElement('interruptBtn');
     if (interruptBtn) {
         interruptBtn.disabled = true;
-        DomHelpers.setText(interruptBtn, '⏳ Interrupting...');
+        DomHelpers.setText(interruptBtn, '⏳ Đang ngắt...');
     }
 
     try {
         await ApiClient.interruptTranslation(currentJob.translationId);
-        MessageLogger.showMessage('Translation interrupt request sent', 'info');
-        MessageLogger.addLog('⏹️ Interrupt request sent to server');
+        MessageLogger.showMessage('Đã gửi yêu cầu ngắt bản dịch', 'info');
+        MessageLogger.addLog('⏹️ Đã gửi yêu cầu ngắt đến máy chủ');
     } catch (error) {
-        MessageLogger.showMessage(`Error interrupting translation: ${error.message}`, 'error');
+        MessageLogger.showMessage(`Lỗi ngắt bản dịch: ${error.message}`, 'error');
         if (interruptBtn) {
             interruptBtn.disabled = false;
-            DomHelpers.setText(interruptBtn, '⏹️ Interrupt Current & Stop Batch');
+            DomHelpers.setText(interruptBtn, '⏹️ Ngắt hiện tại & Dừng hàng loạt');
         }
     }
 };
@@ -480,12 +480,12 @@ window.refreshModels = ProviderManager.refreshModels.bind(ProviderManager);
 window.saveSettings = async () => {
     const result = await SettingsManager.saveAllSettings(true);
     if (result.success && result.savedToEnv && result.savedToEnv.length > 0) {
-        MessageLogger.showMessage(`✅ Settings saved: ${result.savedToEnv.join(', ')}`, 'success');
-        MessageLogger.addLog(`💾 Saved to .env: ${result.savedToEnv.join(', ')}`);
+        MessageLogger.showMessage(`✅ Đã lưu cài đặt: ${result.savedToEnv.join(', ')}`, 'success');
+        MessageLogger.addLog(`💾 Đã lưu vào .env: ${result.savedToEnv.join(', ')}`);
     } else if (result.success) {
-        MessageLogger.showMessage('✅ Preferences saved', 'success');
+        MessageLogger.showMessage('✅ Đã lưu tùy chọn', 'success');
     } else {
-        MessageLogger.showMessage(`❌ Failed to save: ${result.error}`, 'error');
+        MessageLogger.showMessage(`❌ Lưu thất bại: ${result.error}`, 'error');
     }
     return result;
 };
@@ -559,32 +559,32 @@ async function showTTSModal(filename, filepath) {
         <div id="ttsModal" class="modal-overlay">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>🎧 Generate Audiobook</h3>
+                    <h3>🎧 Tạo sách nói</h3>
                     <button class="close-btn" id="ttsModalClose">&times;</button>
                 </div>
                 <div class="modal-body">
                     <p style="margin: 0 0 20px 0; color: #a3adb3; font-size: 14px;">
-                        Generate audio narration for: <strong style="color: #79CDDE;">${DomHelpers.escapeHtml(filename)}</strong>
+                        Tạo lời đọc âm thanh cho: <strong style="color: #79CDDE;">${DomHelpers.escapeHtml(filename)}</strong>
                     </p>
 
                     <!-- Provider Selection -->
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
                         <div class="form-group" style="margin-bottom: 0;">
-                            <label style="font-size: 13px;">TTS Provider</label>
+                            <label style="font-size: 13px;">Nhà cung cấp TTS</label>
                             <select id="ttsModalProvider" class="form-control" style="font-size: 13px;">
-                                <option value="edge-tts">Edge TTS (Cloud)</option>
+                                <option value="edge-tts">Edge TTS (Đám mây)</option>
                                 <option value="chatterbox" ${!isChatterboxAvailable ? 'disabled' : ''}>
-                                    Chatterbox TTS ${!isChatterboxAvailable ? '(Not Available)' : '(Local GPU)'}
+                                    Chatterbox TTS ${!isChatterboxAvailable ? '(Không khả dụng)' : '(GPU cục bộ)'}
                                 </option>
                             </select>
                         </div>
 
                         <!-- GPU Status (shown when Chatterbox selected) -->
                         <div id="ttsModalGpuStatus" class="form-group" style="margin-bottom: 0; display: none;">
-                            <label style="font-size: 13px;">GPU Status</label>
+                            <label style="font-size: 13px;">Trạng thái GPU</label>
                             <div class="gpu-status ${gpuStatus.cuda_available ? 'gpu-available' : 'gpu-unavailable'}">
                                 <span class="status-dot ${gpuStatus.cuda_available ? 'available' : 'unavailable'}"></span>
-                                <span>${gpuStatus.cuda_available ? (gpuStatus.gpu_name || 'CUDA GPU') : 'CPU Mode'}</span>
+                                <span>${gpuStatus.cuda_available ? (gpuStatus.gpu_name || 'CUDA GPU') : 'Chế độ CPU'}</span>
                             </div>
                         </div>
                     </div>
@@ -593,7 +593,7 @@ async function showTTSModal(filename, filepath) {
                     <div id="ttsModalEdgeOptions">
                         <div style="display: grid; gap: 15px;">
                             <div class="form-group" style="margin-bottom: 0;">
-                                <label style="font-size: 13px;">Target Language</label>
+                                <label style="font-size: 13px;">Ngôn ngữ đích</label>
                                 <select id="ttsModalLanguage" class="form-control" style="font-size: 13px;">
                                     <!-- Most Common -->
                                     <option value="Chinese">Chinese (中文)</option>
@@ -645,40 +645,40 @@ async function showTTSModal(filename, filepath) {
                             </div>
 
                             <div class="form-group" style="margin-bottom: 0;">
-                                <label style="font-size: 13px;">Voice (optional)</label>
-                                <input type="text" id="ttsModalVoice" class="form-control" placeholder="e.g., zh-CN-XiaoxiaoNeural" style="font-size: 13px;">
-                                <small style="color: #6b7280;">Leave empty for auto-selection based on language</small>
+                                <label style="font-size: 13px;">Giọng đọc (tùy chọn)</label>
+                                <input type="text" id="ttsModalVoice" class="form-control" placeholder="vd: zh-CN-XiaoxiaoNeural" style="font-size: 13px;">
+                                <small style="color: #6b7280;">Để trống để tự động chọn theo ngôn ngữ</small>
                             </div>
 
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                                 <div class="form-group" style="margin-bottom: 0;">
-                                    <label style="font-size: 13px;">Speech Rate</label>
+                                    <label style="font-size: 13px;">Tốc độ nói</label>
                                     <select id="ttsModalRate" class="form-control" style="font-size: 13px;">
-                                        <option value="-20%">Slower (-20%)</option>
-                                        <option value="-10%">Slightly slower (-10%)</option>
-                                        <option value="+0%" selected>Normal</option>
-                                        <option value="+10%">Slightly faster (+10%)</option>
-                                        <option value="+20%">Faster (+20%)</option>
-                                        <option value="+30%">Much faster (+30%)</option>
+                                        <option value="-20%">Chậm hơn (-20%)</option>
+                                        <option value="-10%">Hơi chậm hơn (-10%)</option>
+                                        <option value="+0%" selected>Bình thường</option>
+                                        <option value="+10%">Hơi nhanh hơn (+10%)</option>
+                                        <option value="+20%">Nhanh hơn (+20%)</option>
+                                        <option value="+30%">Rất nhanh hơn (+30%)</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group" style="margin-bottom: 0;">
-                                    <label style="font-size: 13px;">Audio Format</label>
+                                    <label style="font-size: 13px;">Định dạng âm thanh</label>
                                     <select id="ttsModalFormat" class="form-control" style="font-size: 13px;">
-                                        <option value="opus" selected>Opus (compact)</option>
-                                        <option value="mp3">MP3 (compatible)</option>
+                                        <option value="opus" selected>Opus (gọn)</option>
+                                        <option value="mp3">MP3 (tương thích)</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group" style="margin-bottom: 0;">
-                                <label style="font-size: 13px;">Audio Bitrate</label>
+                                <label style="font-size: 13px;">Bitrate âm thanh</label>
                                 <select id="ttsModalBitrate" class="form-control" style="font-size: 13px;">
-                                    <option value="48k">48k (smaller file)</option>
-                                    <option value="64k" selected>64k (balanced)</option>
-                                    <option value="96k">96k (higher quality)</option>
-                                    <option value="128k">128k (best quality)</option>
+                                    <option value="48k">48k (file nhỏ hơn)</option>
+                                    <option value="64k" selected>64k (cân bằng)</option>
+                                    <option value="96k">96k (chất lượng cao hơn)</option>
+                                    <option value="128k">128k (chất lượng tốt nhất)</option>
                                 </select>
                             </div>
                         </div>
@@ -687,14 +687,14 @@ async function showTTSModal(filename, filepath) {
                     <!-- Chatterbox Options (hidden by default) -->
                     <div id="ttsModalChatterboxOptions" style="display: none;">
                         <div style="background: #2a2a2a; border-radius: 8px; padding: 15px; margin-bottom: 15px; border: 1px solid #fbbf24;">
-                            <h4 style="margin: 0 0 12px 0; font-size: 14px; color: #fbbf24;">🎤 Voice Cloning</h4>
+                            <h4 style="margin: 0 0 12px 0; font-size: 14px; color: #fbbf24;">🎤 Nhân giọng nói</h4>
                             <div class="form-group" style="margin-bottom: 0;">
-                                <label style="font-size: 13px;">Voice Prompt</label>
+                                <label style="font-size: 13px;">Mẫu giọng nói</label>
                                 <select id="ttsModalVoicePrompt" class="form-control" style="font-size: 13px;">
-                                    <option value="">Default voice (no cloning)</option>
+                                    <option value="">Giọng mặc định (không nhân bản)</option>
                                     ${voicePromptsOptions}
                                 </select>
-                                <small style="color: #6b7280;">Select a previously uploaded voice sample</small>
+                                <small style="color: #6b7280;">Chọn mẫu giọng đã tải lên trước</small>
                             </div>
                         </div>
 
@@ -704,20 +704,20 @@ async function showTTSModal(filename, filepath) {
                                     Exaggeration <span id="ttsModalExaggerationValue" style="color: #fbbf24;">0.50</span>
                                 </label>
                                 <input type="range" id="ttsModalExaggeration" min="0" max="1" step="0.05" value="0.5" class="tts-slider">
-                                <small style="color: #6b7280;">Higher = more expressive</small>
+                                <small style="color: #6b7280;">Cao hơn = biểu cảm hơn</small>
                             </div>
                             <div class="form-group" style="margin-bottom: 0;">
                                 <label style="font-size: 13px;">
                                     CFG Weight <span id="ttsModalCfgValue" style="color: #fbbf24;">0.50</span>
                                 </label>
                                 <input type="range" id="ttsModalCfgWeight" min="0" max="1" step="0.05" value="0.5" class="tts-slider">
-                                <small style="color: #6b7280;">Prompt adherence</small>
+                                <small style="color: #6b7280;">Độ bám sát gợi ý</small>
                             </div>
                         </div>
 
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                             <div class="form-group" style="margin-bottom: 0;">
-                                <label style="font-size: 13px;">Target Language</label>
+                                <label style="font-size: 13px;">Ngôn ngữ đích</label>
                                 <select id="ttsModalChatterboxLang" class="form-control" style="font-size: 13px;">
                                     <!-- Most Common -->
                                     <option value="en">English</option>
@@ -749,11 +749,11 @@ async function showTTSModal(filename, filepath) {
                                 </select>
                             </div>
                             <div class="form-group" style="margin-bottom: 0;">
-                                <label style="font-size: 13px;">Audio Format</label>
+                                <label style="font-size: 13px;">Định dạng âm thanh</label>
                                 <select id="ttsModalChatterboxFormat" class="form-control" style="font-size: 13px;">
-                                    <option value="wav">WAV (lossless)</option>
-                                    <option value="mp3" selected>MP3 (compatible)</option>
-                                    <option value="opus">Opus (compact)</option>
+                                    <option value="wav">WAV (không mất dữ liệu)</option>
+                                    <option value="mp3" selected>MP3 (tương thích)</option>
+                                    <option value="opus">Opus (gọn)</option>
                                 </select>
                             </div>
                         </div>
@@ -761,9 +761,9 @@ async function showTTSModal(filename, filepath) {
                 </div>
 
                 <div class="modal-footer">
-                    <button id="ttsModalCancel" class="btn btn-secondary">Cancel</button>
+                    <button id="ttsModalCancel" class="btn btn-secondary">Hủy</button>
                     <button id="ttsModalGenerate" class="btn btn-primary" style="background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);">
-                        🎧 Generate Audio
+                        🎧 Tạo âm thanh
                     </button>
                 </div>
             </div>
@@ -850,13 +850,13 @@ async function showTTSModal(filename, filepath) {
 
         // Disable button and show loading
         generateBtn.disabled = true;
-        generateBtn.textContent = '⏳ Starting...';
+        generateBtn.textContent = '⏳ Đang bắt đầu...';
 
         try {
             const result = await ApiClient.generateTTS(config);
 
-            MessageLogger.showMessage(`TTS generation started for ${filename}`, 'success');
-            MessageLogger.addLog(`🎧 Started audiobook generation (${provider}): ${filename} (Job ID: ${result.job_id})`);
+            MessageLogger.showMessage(`Đã bắt đầu tạo TTS cho ${filename}`, 'success');
+            MessageLogger.addLog(`🎧 Đã bắt đầu tạo sách nói (${provider}): ${filename} (Mã công việc: ${result.job_id})`);
 
             // Close modal
             closeModal();
@@ -868,9 +868,9 @@ async function showTTSModal(filename, filepath) {
             }
 
         } catch (error) {
-            MessageLogger.showMessage(`Error starting TTS: ${error.message}`, 'error');
+            MessageLogger.showMessage(`Lỗi bắt đầu TTS: ${error.message}`, 'error');
             generateBtn.disabled = false;
-            generateBtn.textContent = '🎧 Generate Audio';
+            generateBtn.textContent = '🎧 Tạo âm thanh';
         }
     });
 }

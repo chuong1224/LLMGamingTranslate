@@ -34,14 +34,14 @@ const PROVIDER_LOGOS = {
  * Provider metadata for display
  */
 const PROVIDER_META = {
-    ollama: { name: 'Ollama', description: 'Local' },
-    poe: { name: 'Poe', description: 'Multi-Provider' },
-    deepseek: { name: 'DeepSeek', description: 'Cloud API' },
-    mistral: { name: 'Mistral', description: 'Cloud API' },
-    gemini: { name: 'Gemini', description: 'Cloud' },
-    openai: { name: 'OpenAI', description: 'Compatible' },
-    openrouter: { name: 'OpenRouter', description: '200+ models' },
-    nim: { name: 'NVIDIA NIM', description: 'Cloud API' }
+    ollama: { name: 'Ollama', description: 'Cục bộ' },
+    poe: { name: 'Poe', description: 'Đa nhà cung cấp' },
+    deepseek: { name: 'DeepSeek', description: 'API đám mây' },
+    mistral: { name: 'Mistral', description: 'API đám mây' },
+    gemini: { name: 'Gemini', description: 'Đám mây' },
+    openai: { name: 'OpenAI', description: 'Tương thích' },
+    openrouter: { name: 'OpenRouter', description: '200+ mô hình' },
+    nim: { name: 'NVIDIA NIM', description: 'API đám mây' }
 };
 
 /**
@@ -413,7 +413,7 @@ export const ProviderManager = {
         const providerSelect = DomHelpers.getElement('llmProvider');
         if (providerSelect) {
             SearchableSelectFactory.create('llmProvider', {
-                placeholder: 'Search providers...',
+                placeholder: 'Tìm nhà cung cấp...',
                 showBadge: false,
                 renderOption: (opt) => {
                     const logo = PROVIDER_LOGOS[opt.value] || '';
@@ -471,7 +471,7 @@ export const ProviderManager = {
         const modelSelect = DomHelpers.getElement('model');
         if (modelSelect) {
             SearchableSelectFactory.create('model', {
-                placeholder: 'Search models...',
+                placeholder: 'Tìm mô hình...',
                 allowCustomValue: true, // Allow custom bot names for Poe
                 onSelect: (option) => {
                     // Trigger model detection check
@@ -639,7 +639,7 @@ export const ProviderManager = {
         const thisRequest = { cancelled: false };
         StateManager.setState('models.currentLoadRequest', thisRequest);
 
-        modelSelect.innerHTML = '<option value="">Loading models...</option>';
+        modelSelect.innerHTML = '<option value="">Đang tải mô hình...</option>';
         StatusManager.setChecking();
 
         try {
@@ -692,8 +692,8 @@ export const ProviderManager = {
                     MessageLogger.addLog(`⚠️ No models available from Ollama at ${apiEndpoint} (auto-retrying every ${OLLAMA_RETRY_INTERVAL/1000}s...)`);
                 }
 
-                modelSelect.innerHTML = '<option value="">Waiting for Ollama...</option>';
-                StatusManager.setWaiting('Waiting for Ollama...');
+                modelSelect.innerHTML = '<option value="">Đang chờ Ollama...</option>';
+                StatusManager.setWaiting('Đang chờ Ollama...');
                 this.startOllamaAutoRetry();
             }
 
@@ -701,7 +701,7 @@ export const ProviderManager = {
             if (!thisRequest.cancelled) {
                 // Connection error - start auto-retry
                 if (ollamaRetryCount >= OLLAMA_MAX_SILENT_RETRIES) {
-                    MessageLogger.showMessage(`⚠️ Waiting for Ollama to start...`, 'warning');
+                    MessageLogger.showMessage(`⚠️ Đang chờ Ollama khởi động...`, 'warning');
                     MessageLogger.addLog(`⚠️ Ollama not accessible, auto-retrying every ${OLLAMA_RETRY_INTERVAL/1000}s...`);
                 }
 
@@ -758,7 +758,7 @@ export const ProviderManager = {
         const modelSelect = DomHelpers.getElement('model');
         if (!modelSelect) return;
 
-        modelSelect.innerHTML = '<option value="">Loading Gemini models...</option>';
+        modelSelect.innerHTML = '<option value="">Đang tải mô hình Gemini...</option>';
         StatusManager.setChecking();
 
         try {
@@ -789,15 +789,15 @@ export const ProviderManager = {
             } else {
                 const errorMessage = data.error || 'No Gemini models available.';
                 MessageLogger.showMessage(`⚠️ ${errorMessage}`, 'error');
-                modelSelect.innerHTML = '<option value="">No models available</option>';
+                modelSelect.innerHTML = '<option value="">Không có mô hình khả dụng</option>';
                 MessageLogger.addLog(`⚠️ No Gemini models available`);
                 StatusManager.setError('No models');
             }
 
         } catch (error) {
-            MessageLogger.showMessage(`❌ Error fetching Gemini models: ${error.message}`, 'error');
+            MessageLogger.showMessage(`❌ Lỗi tải mô hình Gemini: ${error.message}`, 'error');
             MessageLogger.addLog(`❌ Failed to retrieve Gemini model list: ${error.message}`);
-            modelSelect.innerHTML = '<option value="">Error loading models</option>';
+            modelSelect.innerHTML = '<option value="">Lỗi tải mô hình</option>';
             StatusManager.setError(error.message);
         }
     },
@@ -813,7 +813,7 @@ export const ProviderManager = {
 
         const apiEndpoint = DomHelpers.getValue('openaiEndpoint') || 'https://api.openai.com/v1/chat/completions';
 
-        modelSelect.innerHTML = '<option value="">Loading models...</option>';
+        modelSelect.innerHTML = '<option value="">Đang tải mô hình...</option>';
         StatusManager.setChecking();
 
         try {
@@ -845,11 +845,11 @@ export const ProviderManager = {
             } else {
                 // No models returned from endpoint
                 const errorMsg = data.error || 'No models available from endpoint';
-                MessageLogger.showMessage(`⚠️ ${errorMsg}. Using fallback OpenAI models.`, 'warning');
+                MessageLogger.showMessage(`⚠️ ${errorMsg}. Sử dụng danh sách dự phòng OpenAI.`, 'warning');
                 MessageLogger.addLog(`⚠️ ${errorMsg}. Using fallback list.`);
             }
         } catch (error) {
-            MessageLogger.showMessage(`⚠️ Could not connect to endpoint. Using fallback OpenAI models.`, 'warning');
+            MessageLogger.showMessage(`⚠️ Không thể kết nối endpoint. Sử dụng danh sách dự phòng OpenAI.`, 'warning');
             MessageLogger.addLog(`⚠️ Connection error: ${error.message}. Using fallback list.`);
         }
 
@@ -871,7 +871,7 @@ export const ProviderManager = {
         const modelSelect = DomHelpers.getElement('model');
         if (!modelSelect) return;
 
-        modelSelect.innerHTML = '<option value="">Loading OpenRouter models...</option>';
+        modelSelect.innerHTML = '<option value="">Đang tải mô hình OpenRouter...</option>';
         StatusManager.setChecking();
 
         try {
@@ -902,7 +902,7 @@ export const ProviderManager = {
             } else {
                 // Use fallback list
                 const errorMessage = data.error || 'Could not load models from OpenRouter API';
-                MessageLogger.showMessage(`⚠️ ${errorMessage}. Using fallback list.`, 'warning');
+                MessageLogger.showMessage(`⚠️ ${errorMessage}. Sử dụng danh sách dự phòng.`, 'warning');
                 populateModelSelect(OPENROUTER_FALLBACK_MODELS, 'anthropic/claude-sonnet-4', 'openrouter');
                 MessageLogger.addLog(`⚠️ Using fallback OpenRouter models list`);
 
@@ -915,7 +915,7 @@ export const ProviderManager = {
 
         } catch (error) {
             // Use fallback list on error
-            MessageLogger.showMessage(`⚠️ Error fetching OpenRouter models. Using fallback list.`, 'warning');
+            MessageLogger.showMessage(`⚠️ Lỗi tải mô hình OpenRouter. Sử dụng danh sách dự phòng.`, 'warning');
             MessageLogger.addLog(`⚠️ OpenRouter API error: ${error.message}. Using fallback list.`);
             populateModelSelect(OPENROUTER_FALLBACK_MODELS, 'anthropic/claude-sonnet-4', 'openrouter');
 
@@ -934,15 +934,15 @@ export const ProviderManager = {
         const modelSelect = DomHelpers.getElement('model');
         if (!modelSelect) return;
 
-        modelSelect.innerHTML = '<option value="">Loading Mistral models...</option>';
+        modelSelect.innerHTML = '<option value="">Đang tải mô hình Mistral...</option>';
         StatusManager.setChecking();
 
         try {
             // Use ApiKeyUtils to get API key (returns '__USE_ENV__' if configured in .env)
             const apiKey = ApiKeyUtils.getValue('mistralApiKey');
             if (!apiKey) {
-                MessageLogger.showMessage('⚠️ Mistral API key required', 'warning');
-                modelSelect.innerHTML = '<option value="">Enter API key first</option>';
+                MessageLogger.showMessage('⚠️ Yêu cầu khóa API Mistral', 'warning');
+                modelSelect.innerHTML = '<option value="">Vui lòng nhập khóa API trước</option>';
                 StatusManager.setError('No API key');
                 return;
             }
@@ -970,12 +970,12 @@ export const ProviderManager = {
             } else {
                 const errorMessage = data.error || 'No Mistral models available';
                 MessageLogger.showMessage(`⚠️ ${errorMessage}`, 'error');
-                modelSelect.innerHTML = '<option value="">No models available</option>';
+                modelSelect.innerHTML = '<option value="">Không có mô hình khả dụng</option>';
                 StatusManager.setError('No models');
             }
         } catch (error) {
-            MessageLogger.showMessage(`❌ Error: ${error.message}`, 'error');
-            modelSelect.innerHTML = '<option value="">Error loading models</option>';
+            MessageLogger.showMessage(`❌ Lỗi: ${error.message}`, 'error');
+            modelSelect.innerHTML = '<option value="">Lỗi tải mô hình</option>';
             StatusManager.setError(error.message);
         }
     },
@@ -987,15 +987,15 @@ export const ProviderManager = {
         const modelSelect = DomHelpers.getElement('model');
         if (!modelSelect) return;
 
-        modelSelect.innerHTML = '<option value="">Loading DeepSeek models...</option>';
+        modelSelect.innerHTML = '<option value="">Đang tải mô hình DeepSeek...</option>';
         StatusManager.setChecking();
 
         try {
             // Use ApiKeyUtils to get API key (returns '__USE_ENV__' if configured in .env)
             const apiKey = ApiKeyUtils.getValue('deepseekApiKey');
             if (!apiKey) {
-                MessageLogger.showMessage('DeepSeek API key required', 'warning');
-                modelSelect.innerHTML = '<option value="">Enter API key first</option>';
+                MessageLogger.showMessage('Yêu cầu khóa API DeepSeek', 'warning');
+                modelSelect.innerHTML = '<option value="">Vui lòng nhập khóa API trước</option>';
                 StatusManager.setError('No API key');
                 return;
             }
@@ -1023,7 +1023,7 @@ export const ProviderManager = {
             } else {
                 // Use fallback list
                 const errorMessage = data.error || 'Could not load models from DeepSeek API';
-                MessageLogger.showMessage(`${errorMessage}. Using fallback list.`, 'warning');
+                MessageLogger.showMessage(`${errorMessage}. Sử dụng danh sách dự phòng.`, 'warning');
                 populateModelSelect(DEEPSEEK_FALLBACK_MODELS, 'deepseek-chat', 'deepseek');
                 MessageLogger.addLog(`Using fallback DeepSeek models list`);
 
@@ -1032,7 +1032,7 @@ export const ProviderManager = {
             }
         } catch (error) {
             // Use fallback list on error
-            MessageLogger.showMessage(`Error: ${error.message}. Using fallback list.`, 'warning');
+            MessageLogger.showMessage(`Lỗi: ${error.message}. Sử dụng danh sách dự phòng.`, 'warning');
             MessageLogger.addLog(`DeepSeek API error: ${error.message}. Using fallback list.`);
             populateModelSelect(DEEPSEEK_FALLBACK_MODELS, 'deepseek-chat', 'deepseek');
 
@@ -1048,14 +1048,14 @@ export const ProviderManager = {
         const modelSelect = DomHelpers.getElement('model');
         if (!modelSelect) return;
 
-        modelSelect.innerHTML = '<option value="">Loading NIM models...</option>';
+        modelSelect.innerHTML = '<option value="">Đang tải mô hình NIM...</option>';
         StatusManager.setChecking();
 
         try {
             const apiKey = ApiKeyUtils.getValue('nimApiKey');
             if (!apiKey) {
-                MessageLogger.showMessage('NVIDIA NIM API key required', 'warning');
-                modelSelect.innerHTML = '<option value="">Enter API key first</option>';
+                MessageLogger.showMessage('Yêu cầu khóa API NVIDIA NIM', 'warning');
+                modelSelect.innerHTML = '<option value="">Vui lòng nhập khóa API trước</option>';
                 StatusManager.setError('No API key');
                 return;
             }
@@ -1081,7 +1081,7 @@ export const ProviderManager = {
                 StatusManager.setConnected('nim', data.count);
             } else {
                 const errorMessage = data.error || 'Could not load models from NIM API';
-                MessageLogger.showMessage(`${errorMessage}. Using fallback list.`, 'warning');
+                MessageLogger.showMessage(`${errorMessage}. Sử dụng danh sách dự phòng.`, 'warning');
                 populateModelSelect(NIM_FALLBACK_MODELS, 'meta/llama-3.1-70b-instruct', 'nim');
                 MessageLogger.addLog(`Using fallback NIM models list`);
 
@@ -1089,7 +1089,7 @@ export const ProviderManager = {
                 StatusManager.setConnected('nim', NIM_FALLBACK_MODELS.length);
             }
         } catch (error) {
-            MessageLogger.showMessage(`Error: ${error.message}. Using fallback list.`, 'warning');
+            MessageLogger.showMessage(`Lỗi: ${error.message}. Sử dụng danh sách dự phòng.`, 'warning');
             MessageLogger.addLog(`NIM API error: ${error.message}. Using fallback list.`);
             populateModelSelect(NIM_FALLBACK_MODELS, 'meta/llama-3.1-70b-instruct', 'nim');
 
@@ -1105,15 +1105,15 @@ export const ProviderManager = {
         const modelSelect = DomHelpers.getElement('model');
         if (!modelSelect) return;
 
-        modelSelect.innerHTML = '<option value="">Loading Poe models...</option>';
+        modelSelect.innerHTML = '<option value="">Đang tải mô hình Poe...</option>';
         StatusManager.setChecking();
 
         try {
             // Use ApiKeyUtils to get API key (returns '__USE_ENV__' if configured in .env)
             const apiKey = ApiKeyUtils.getValue('poeApiKey');
             if (!apiKey) {
-                MessageLogger.showMessage('Poe API key required. Get your key at poe.com/api_key', 'warning');
-                modelSelect.innerHTML = '<option value="">Enter API key first</option>';
+                MessageLogger.showMessage('Yêu cầu khóa API Poe. Lấy khóa tại poe.com/api_key', 'warning');
+                modelSelect.innerHTML = '<option value="">Vui lòng nhập khóa API trước</option>';
                 StatusManager.setError('No API key');
                 return;
             }
@@ -1135,7 +1135,7 @@ export const ProviderManager = {
             } else {
                 // Use fallback list
                 const errorMessage = data.error || 'Could not load models from Poe API';
-                MessageLogger.showMessage(`${errorMessage}. Using fallback list.`, 'warning');
+                MessageLogger.showMessage(`${errorMessage}. Sử dụng danh sách dự phòng.`, 'warning');
                 populateModelSelect(POE_FALLBACK_MODELS, 'Claude-Sonnet-4', 'poe');
                 MessageLogger.addLog(`Using fallback Poe models list`);
 
@@ -1144,7 +1144,7 @@ export const ProviderManager = {
             }
         } catch (error) {
             // Use fallback list on error
-            MessageLogger.showMessage(`Error: ${error.message}. Using fallback list.`, 'warning');
+            MessageLogger.showMessage(`Lỗi: ${error.message}. Sử dụng danh sách dự phòng.`, 'warning');
             MessageLogger.addLog(`Poe API error: ${error.message}. Using fallback list.`);
             populateModelSelect(POE_FALLBACK_MODELS, 'Claude-Sonnet-4', 'poe');
 

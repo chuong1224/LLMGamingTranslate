@@ -118,7 +118,7 @@ export const FileManager = {
 
         } catch (error) {
             if (loadingDiv) loadingDiv.style.display = 'none';
-            MessageLogger.showMessage(`Error loading file list: ${error.message}`, 'error');
+            MessageLogger.showMessage(`Lỗi tải danh sách file: ${error.message}`, 'error');
         }
     },
 
@@ -158,7 +158,7 @@ export const FileManager = {
                 </span>
             </td>
             <td style="width: 100px; text-align: center; white-space: nowrap; padding: 0.5rem;">
-                <div style="display: inline-flex; gap: 0.125rem; align-items: center; justify-content: center;">${supportsTTS ? `<button class="file-action-btn audiobook" data-filename="${DomHelpers.escapeHtml(file.filename)}" data-filepath="${DomHelpers.escapeHtml(file.file_path)}" data-action="audiobook" title="Generate Audiobook (TTS)"><span class="material-symbols-outlined" style="font-size: 0.875rem;">headphones</span></button>` : ''}<button class="file-action-btn download" data-filename="${DomHelpers.escapeHtml(file.filename)}" data-action="download" title="Download"><span class="material-symbols-outlined" style="font-size: 0.875rem;">download</span></button><button class="file-action-btn delete" data-filename="${DomHelpers.escapeHtml(file.filename)}" data-action="delete" title="Delete"><span class="material-symbols-outlined" style="font-size: 0.875rem;">delete</span></button></div>
+                <div style="display: inline-flex; gap: 0.125rem; align-items: center; justify-content: center;">${supportsTTS ? `<button class="file-action-btn audiobook" data-filename="${DomHelpers.escapeHtml(file.filename)}" data-filepath="${DomHelpers.escapeHtml(file.file_path)}" data-action="audiobook" title="Tạo sách nói (TTS)"><span class="material-symbols-outlined" style="font-size: 0.875rem;">headphones</span></button>` : ''}<button class="file-action-btn download" data-filename="${DomHelpers.escapeHtml(file.filename)}" data-action="download" title="Tải xuống"><span class="material-symbols-outlined" style="font-size: 0.875rem;">download</span></button><button class="file-action-btn delete" data-filename="${DomHelpers.escapeHtml(file.filename)}" data-action="delete" title="Xóa"><span class="material-symbols-outlined" style="font-size: 0.875rem;">delete</span></button></div>
             </td>
         `;
 
@@ -279,11 +279,11 @@ export const FileManager = {
         const downloadBtn = DomHelpers.getElement('batchDownloadBtn');
         const deleteBtn = DomHelpers.getElement('batchDeleteBtn');
         if (hasSelection) {
-            if (downloadBtn) downloadBtn.innerHTML = `<span class="material-symbols-outlined">download</span> Download Selected (${selectedFiles.size})`;
-            if (deleteBtn) deleteBtn.innerHTML = `<span class="material-symbols-outlined">delete</span> Delete Selected (${selectedFiles.size})`;
+            if (downloadBtn) downloadBtn.innerHTML = `<span class="material-symbols-outlined">download</span> Tải xuống đã chọn (${selectedFiles.size})`;
+            if (deleteBtn) deleteBtn.innerHTML = `<span class="material-symbols-outlined">delete</span> Xóa đã chọn (${selectedFiles.size})`;
         } else {
-            if (downloadBtn) downloadBtn.innerHTML = `<span class="material-symbols-outlined">download</span> Download Selected`;
-            if (deleteBtn) deleteBtn.innerHTML = `<span class="material-symbols-outlined">delete</span> Delete Selected`;
+            if (downloadBtn) downloadBtn.innerHTML = `<span class="material-symbols-outlined">download</span> Tải xuống đã chọn`;
+            if (deleteBtn) deleteBtn.innerHTML = `<span class="material-symbols-outlined">delete</span> Xóa đã chọn`;
         }
     },
 
@@ -300,7 +300,7 @@ export const FileManager = {
      * @param {string} filename - Filename to delete
      */
     async deleteSingleFile(filename) {
-        if (!confirm(`Are you sure you want to delete "${filename}"?`)) {
+        if (!confirm(`Bạn có chắc muốn xóa "${filename}"?`)) {
             return;
         }
 
@@ -309,7 +309,7 @@ export const FileManager = {
             MessageLogger.showMessage(data.message, 'success');
             this.refreshFileList();
         } catch (error) {
-            MessageLogger.showMessage(`Error deleting file: ${error.message}`, 'error');
+            MessageLogger.showMessage(`Lỗi xóa file: ${error.message}`, 'error');
         }
     },
 
@@ -320,7 +320,7 @@ export const FileManager = {
         const selectedFiles = StateManager.getState('files.selected');
 
         if (selectedFiles.size === 0) {
-            MessageLogger.showMessage('No files selected for download', 'error');
+            MessageLogger.showMessage('Chưa chọn file nào để tải xuống', 'error');
             return;
         }
 
@@ -348,13 +348,13 @@ export const FileManager = {
                 window.URL.revokeObjectURL(url);
                 document.body.removeChild(a);
 
-                MessageLogger.showMessage(`Downloaded ${selectedFiles.size} files as zip`, 'success');
+                MessageLogger.showMessage(`Đã tải xuống ${selectedFiles.size} file dưới dạng zip`, 'success');
             } else {
                 const data = await response.json();
-                MessageLogger.showMessage(data.error || 'Failed to download files', 'error');
+                MessageLogger.showMessage(data.error || 'Tải xuống file thất bại', 'error');
             }
         } catch (error) {
-            MessageLogger.showMessage(`Error downloading files: ${error.message}`, 'error');
+            MessageLogger.showMessage(`Lỗi tải xuống file: ${error.message}`, 'error');
         }
     },
 
@@ -365,11 +365,11 @@ export const FileManager = {
         const selectedFiles = StateManager.getState('files.selected');
 
         if (selectedFiles.size === 0) {
-            MessageLogger.showMessage('No files selected for deletion', 'error');
+            MessageLogger.showMessage('Chưa chọn file nào để xóa', 'error');
             return;
         }
 
-        if (!confirm(`Are you sure you want to delete ${selectedFiles.size} file(s)?`)) {
+        if (!confirm(`Bạn có chắc muốn xóa ${selectedFiles.size} file?`)) {
             return;
         }
 
@@ -387,17 +387,17 @@ export const FileManager = {
             const data = await response.json();
 
             if (response.ok) {
-                let message = `Deleted ${data.total_deleted} file(s)`;
+                let message = `Đã xóa ${data.total_deleted} file`;
                 if (data.failed.length > 0) {
-                    message += `. Failed to delete ${data.failed.length} file(s)`;
+                    message += `. Không thể xóa ${data.failed.length} file`;
                 }
                 MessageLogger.showMessage(message, data.failed.length > 0 ? 'info' : 'success');
                 this.refreshFileList();
             } else {
-                MessageLogger.showMessage(data.error || 'Failed to delete files', 'error');
+                MessageLogger.showMessage(data.error || 'Xóa file thất bại', 'error');
             }
         } catch (error) {
-            MessageLogger.showMessage(`Error deleting files: ${error.message}`, 'error');
+            MessageLogger.showMessage(`Lỗi xóa file: ${error.message}`, 'error');
         }
     },
 
@@ -408,10 +408,10 @@ export const FileManager = {
     async openLocalFile(filename) {
         try {
             const data = await ApiClient.openLocalFile(filename);
-            MessageLogger.showMessage(`File opened: ${filename}`, 'success');
-            MessageLogger.addLog(`📂 Opened file: ${filename}`);
+            MessageLogger.showMessage(`Đã mở file: ${filename}`, 'success');
+            MessageLogger.addLog(`📂 Đã mở file: ${filename}`);
         } catch (error) {
-            MessageLogger.showMessage(`Error opening file: ${error.message}`, 'error');
+            MessageLogger.showMessage(`Lỗi mở file: ${error.message}`, 'error');
         }
     }
 };

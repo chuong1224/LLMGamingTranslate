@@ -348,7 +348,7 @@ export const TranslationTracker = {
                     const translateBtn = DomHelpers.getElement('translateBtn');
                     if (translateBtn) {
                         translateBtn.disabled = true;
-                        translateBtn.innerHTML = '⏳ Batch in Progress...';
+                        translateBtn.innerHTML = '⏳ Đang xử lý hàng loạt...';
                     }
                     DomHelpers.show('interruptBtn');
 
@@ -419,7 +419,7 @@ export const TranslationTracker = {
         if (data.status === 'completed') {
             MessageLogger.resetProgressTracking();
             this.finishCurrentFileTranslation(
-                `✅ ${currentFile.name}: Translation completed!`,
+                `✅ ${currentFile.name}: Dịch hoàn thành!`,
                 'success',
                 data
             );
@@ -427,7 +427,7 @@ export const TranslationTracker = {
         } else if (data.status === 'interrupted') {
             MessageLogger.resetProgressTracking();
             this.finishCurrentFileTranslation(
-                `ℹ️ ${currentFile.name}: Translation interrupted.`,
+                `ℹ️ ${currentFile.name}: Đã ngắt dịch.`,
                 'info',
                 data
             );
@@ -435,7 +435,7 @@ export const TranslationTracker = {
         } else if (data.status === 'error') {
             MessageLogger.resetProgressTracking();
             this.finishCurrentFileTranslation(
-                `❌ ${currentFile.name}: Error - ${data.error || 'Unknown error.'}`,
+                `❌ ${currentFile.name}: Lỗi - ${data.error || 'Lỗi không xác định.'}`,
                 'error',
                 data
             );
@@ -447,7 +447,7 @@ export const TranslationTracker = {
             this.updateTranslationTitle(currentFile);
             this.resetOpenRouterCostDisplay();
 
-            MessageLogger.showMessage(`Translation in progress for ${currentFile.name}...`, 'info');
+            MessageLogger.showMessage(`Đang dịch ${currentFile.name}...`, 'info');
             this.updateFileStatusInList(currentFile.name, 'Processing');
         }
     },
@@ -471,7 +471,7 @@ export const TranslationTracker = {
 
         // Add "Translating" text
         const translatingText = document.createElement('div');
-        translatingText.textContent = 'Translating';
+        translatingText.textContent = 'Đang dịch';
         translatingText.style.fontWeight = 'bold';
         mainContainer.appendChild(translatingText);
 
@@ -698,8 +698,8 @@ export const TranslationTracker = {
         MessageLogger.showMessage(statusMessage, messageType);
         this.updateFileStatusInList(
             currentFile.name,
-            resultData.status === 'completed' ? 'Completed' :
-            (resultData.status === 'interrupted' ? 'Interrupted' : 'Error')
+            resultData.status === 'completed' ? 'Hoàn thành' :
+            (resultData.status === 'interrupted' ? 'Đã ngắt' : 'Lỗi')
         );
 
         StateManager.setState('translation.currentJob', null);
@@ -707,7 +707,7 @@ export const TranslationTracker = {
         if (resultData.status === 'completed') {
             this.processNextFileInQueue();
         } else if (resultData.status === 'interrupted') {
-            MessageLogger.addLog('🛑 Batch processing stopped by user.');
+            MessageLogger.addLog('🛑 Xử lý hàng loạt đã bị dừng bởi người dùng.');
             this.resetUIToIdle();
         } else {
             this.processNextFileInQueue();
@@ -764,12 +764,12 @@ export const TranslationTracker = {
                 button.disabled = true;
                 button.style.opacity = '0.5';
                 button.style.cursor = 'not-allowed';
-                button.title = '⚠️ Cannot resume: a translation is already in progress';
+                button.title = '⚠️ Không thể tiếp tục: đang có bản dịch đang hoạt động';
             } else {
                 button.disabled = false;
                 button.style.opacity = '1';
                 button.style.cursor = 'pointer';
-                button.title = 'Resume this translation';
+                button.title = 'Tiếp tục bản dịch này';
             }
         });
 
@@ -795,9 +795,9 @@ export const TranslationTracker = {
                     <div style="display: flex; align-items: center; gap: 10px;">
                         <span style="font-size: 20px;">⚠️</span>
                         <div style="flex: 1;">
-                            <strong style="color: #92400e;">Active translation in progress</strong>
+                            <strong style="color: #92400e;">Đang có bản dịch hoạt động</strong>
                             <p style="margin: 5px 0 0 0; font-size: 13px; color: #78350f;">
-                                Resume disabled. Active translation(s): ${DomHelpers.escapeHtml(activeNames)}
+                                Tạm thời không thể tiếp tục. Bản dịch đang hoạt động: ${DomHelpers.escapeHtml(activeNames)}
                             </p>
                         </div>
                     </div>
@@ -824,11 +824,11 @@ export const TranslationTracker = {
 
         DomHelpers.hide('interruptBtn');
         DomHelpers.setDisabled('interruptBtn', false);
-        DomHelpers.setText('interruptBtn', '⏹️ Interrupt Current & Stop Batch');
+        DomHelpers.setText('interruptBtn', '⏹️ Ngắt hiện tại & Dừng hàng loạt');
 
         const filesToProcess = StateManager.getState('files.toProcess');
         DomHelpers.setDisabled('translateBtn', filesToProcess.length === 0 || !StatusManager.isConnected());
-        DomHelpers.setText('translateBtn', '▶️ Start Translation Batch');
+        DomHelpers.setText('translateBtn', '▶️ Bắt đầu dịch hàng loạt');
 
         if (filesToProcess.length === 0) {
             DomHelpers.hide('progressSection');
