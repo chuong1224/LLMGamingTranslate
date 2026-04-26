@@ -436,6 +436,17 @@ window.resetFiles = () => {
 window.toggleSettingsOptions = FormManager.toggleSettingsOptions.bind(FormManager);
 window.togglePromptOptions = FormManager.togglePromptOptions.bind(FormManager);
 window.toggleActivityLog = FormManager.toggleActivityLog.bind(FormManager);
+
+// Collapsible toggles for bottom cards
+const _genericToggle = (sectionId, iconId) => {
+    const section = DomHelpers.getElement(sectionId);
+    const icon = DomHelpers.getElement(iconId);
+    if (!section || !icon) return;
+    const isHidden = section.classList.toggle('hidden');
+    icon.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+};
+window.toggleResumableJobs = () => _genericToggle('resumableJobsBody', 'resumableJobsIcon');
+window.toggleFileManagement = () => _genericToggle('fileManagementBody', 'fileManagementIcon');
 window.checkCustomSourceLanguage = (element) => FormManager.checkCustomSourceLanguage(element);
 window.checkCustomTargetLanguage = (element) => FormManager.checkCustomTargetLanguage(element);
 window.resetForm = FormManager.resetForm.bind(FormManager);

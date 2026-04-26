@@ -148,6 +148,14 @@ export const ResumeManager = {
             if (section) section.style.display = 'block';
             if (listContainer) listContainer.style.display = 'block';
 
+            // Auto-expand the collapsible body when jobs are present
+            const body = DomHelpers.getElement('resumableJobsBody');
+            const icon = DomHelpers.getElement('resumableJobsIcon');
+            if (body && body.classList.contains('hidden')) {
+                body.classList.remove('hidden');
+                if (icon) icon.style.transform = 'rotate(180deg)';
+            }
+
             // Build warning banner if active translation exists
             const warningBanner = createWarningBanner(hasActiveTranslation ? activeJobs : null);
 

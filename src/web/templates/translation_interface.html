@@ -34,17 +34,20 @@
                     <div class="status-dot"></div>
                     <span id="providerStatusText">LLM: Đang kiểm tra...</span>
                 </div>
-                <button class="btn btn-secondary" id="themeToggleBtn" onclick="toggleTheme()" title="Chuyển chế độ tối/sáng" style="padding: 0.75rem; margin-left: 1rem;">
+                <button class="btn btn-secondary" id="themeToggleBtn" onclick="toggleTheme()" title="Chuyển chế độ tối/sáng" style="padding: 0.5rem; margin-left: 0.5rem;">
                     <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
                 </button>
             </div>
         </header>
 
-        <!-- Main Translation Configuration Card -->
-        <div class="main-card">
+        <!-- App grid: 2-column workspace -->
+        <div class="app-grid">
+
+        <!-- LEFT COLUMN: Configuration -->
+        <div class="main-card col-config">
             <div class="card-body">
                 <!-- Languages Row -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 10px;">
                     <div class="form-group" style="margin-bottom: 0;">
                         <label>Ngôn ngữ nguồn</label>
                         <div class="neu-inset-light">
@@ -195,8 +198,8 @@
                 </div>
 
                 <!-- Settings (Collapsible) -->
-                <div class="prompt-options-toggle" onclick="toggleSettingsOptions()">
-                    <span style="display: flex; align-items: center; gap: 0.75rem;">
+                <div class="prompt-options-toggle" onclick="toggleSettingsOptions()" style="margin-top: 0.6rem;">
+                    <span style="display: flex; align-items: center; gap: 0.6rem;">
                         <span class="material-symbols-outlined">tune</span>
                         <span>Cài đặt</span>
                     </span>
@@ -205,7 +208,7 @@
 
                 <div id="settingsOptionsSection" class="hidden">
                     <!-- Provider + API Settings Row -->
-                    <div id="providerRow" style="display: grid; grid-template-columns: 1fr 2fr; gap: 15px; margin-bottom: 15px; align-items: end;">
+                    <div id="providerRow" style="display: grid; grid-template-columns: 1fr 2fr; gap: 15px; margin-bottom: 10px; align-items: end;">
                         <div class="form-group" style="margin-bottom: 0;">
                             <label>Nhà cung cấp AI</label>
                             <div class="neu-inset-light">
@@ -294,7 +297,7 @@
                     </div>
 
                     <!-- Model Selection Row (Full Width) -->
-                    <div style="display: grid; grid-template-columns: 1fr auto; gap: 15px; margin-bottom: 15px; align-items: end;">
+                    <div style="display: grid; grid-template-columns: 1fr auto; gap: 15px; margin-bottom: 10px; align-items: end;">
                         <div class="form-group" style="margin-bottom: 0;">
                             <label>Chọn mô hình</label>
                             <div class="neu-inset-light">
@@ -307,13 +310,13 @@
                                 <p id="thinkingModelWarningText" style="margin: 0; font-size: 13px; color: #991b1b; white-space: pre-line;"></p>
                             </div>
                         </div>
-                        <button class="btn btn-secondary" onclick="refreshModels()" title="Làm mới danh sách mô hình" style="height: 56px; padding: 0 1rem;">
+                        <button class="btn btn-secondary" onclick="refreshModels()" title="Làm mới danh sách mô hình" style="height: 2.6rem; padding: 0 0.75rem;">
                             <span class="material-symbols-outlined">refresh</span>
                         </button>
                     </div>
 
                     <!-- OpenAI Endpoint Row (shown only for OpenAI provider) -->
-                    <div id="openaiEndpointRow" style="display: none; margin-bottom: 15px;">
+                    <div id="openaiEndpointRow" style="display: none; margin-bottom: 10px;">
                         <div class="form-group" style="margin-bottom: 0;">
                             <label>
                                 Điểm cuối API
@@ -330,7 +333,7 @@
                     </div>
 
                     <!-- Output Filename Pattern -->
-                    <div class="form-group" style="margin-bottom: 15px;">
+                    <div class="form-group" style="margin-bottom: 10px;">
                         <label>Quy tắc đặt tên</label>
                         <div class="neu-inset-light">
                             <input type="text" class="form-control" id="outputFilenamePattern" value="{originalName} ({targetLang}).{ext}" title="Dùng {originalName}, {targetLang}, {sourceLang}, {model}, {date}, {datetime}, {ext} làm mẫu thay thế">
@@ -339,20 +342,17 @@
                     </div>
 
                     <!-- Save Settings Button -->
-                    <div class="form-group" style="margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border-color);">
-                        <button type="button" id="saveSettingsBtn" class="btn btn-primary" style="width: 100%;" onclick="saveSettings()">
+                    <div class="form-group" style="margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border-color);">
+                        <button type="button" id="saveSettingsBtn" class="btn btn-primary" style="width: 100%; padding: 0.5rem 1rem;" onclick="saveSettings()">
                             <span class="material-symbols-outlined">save</span>
                             Lưu cài đặt vào .env
                         </button>
-                        <p style="margin: 8px 0 15px 0; font-size: 0.8125rem; color: var(--text-muted-light);">
-                            Lưu khóa API, điểm cuối, quy tắc đặt tên và mô hình hiện tại làm giá trị mặc định vào file <code>.env</code>.
-                        </p>
                     </div>
                 </div>
 
                 <!-- Options (Collapsible) -->
                 <div class="prompt-options-toggle" onclick="togglePromptOptions()">
-                    <span style="display: flex; align-items: center; gap: 0.75rem;">
+                    <span style="display: flex; align-items: center; gap: 0.6rem;">
                         <span class="material-symbols-outlined">edit_note</span>
                         <span>Tùy chọn</span>
                     </span>
@@ -361,7 +361,7 @@
 
                 <div id="promptOptionsSection" class="hidden">
                     <!-- Polish Translation (Refinement Pass) -->
-                    <div class="form-group" style="margin-bottom: 15px;">
+                    <div class="form-group" style="margin-bottom: 10px;">
                         <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;">
                             <input type="checkbox" id="refineTranslation">
                             <div>
@@ -374,7 +374,7 @@
                     </div>
 
                     <!-- Bilingual Output -->
-                    <div class="form-group" style="margin-bottom: 15px;">
+                    <div class="form-group" style="margin-bottom: 10px;">
                         <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;">
                             <input type="checkbox" id="bilingualMode">
                             <div>
@@ -429,17 +429,22 @@
                 </div>
 
                 <!-- Action Buttons -->
-                <div style="text-align: center; margin-top: 30px; display: flex; justify-content: center; gap: 15px;">
+                <div class="action-buttons-row">
                     <button class="btn btn-primary" id="translateBtn" onclick="startBatchTranslation()" disabled>
                         <span class="material-symbols-outlined">play_circle</span>
                         Bắt đầu dịch hàng loạt
                     </button>
                     <button class="btn btn-danger hidden" id="interruptBtn" onclick="interruptCurrentTranslation()">
                         <span class="material-symbols-outlined">stop_circle</span>
-                        Ngắt hiện tại & Dừng hàng loạt
+                        Ngắt &amp; Dừng
                     </button>
                 </div>
+            </div>
+        </div>
 
+        <!-- RIGHT COLUMN: Progress, Status & Log -->
+        <div class="main-card col-status">
+            <div class="card-body">
                 <!-- Messages (connection status, notifications) -->
                 <div id="messages"></div>
 
@@ -513,8 +518,8 @@
                 </div>
 
                 <!-- Activity Log (Collapsible) -->
-                <div class="prompt-options-toggle" onclick="toggleActivityLog()" style="margin-top: 30px;">
-                    <span style="display: flex; align-items: center; gap: 0.75rem;">
+                <div class="prompt-options-toggle" onclick="toggleActivityLog()" style="margin-top: 0.85rem;">
+                    <span style="display: flex; align-items: center; gap: 0.6rem;">
                         <span class="material-symbols-outlined">terminal</span>
                         <span>Nhật ký hoạt động</span>
                     </span>
@@ -522,8 +527,8 @@
                 </div>
 
                 <div id="activityLogSection" class="hidden">
-                    <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
-                        <button class="btn btn-secondary" onclick="clearActivityLog()" style="font-size: 0.75rem; padding: 0.5rem 1rem;">
+                    <div style="display: flex; justify-content: flex-end; margin-bottom: 8px;">
+                        <button class="btn btn-secondary" onclick="clearActivityLog()" style="font-size: 0.75rem; padding: 0.4rem 0.8rem;">
                             <span class="material-symbols-outlined" style="font-size: 1rem;">delete</span>
                             Xóa nhật ký
                         </button>
@@ -533,19 +538,26 @@
             </div>
         </div>
 
-        <!-- Resumable Jobs Section -->
-        <div class="main-card" id="resumableJobsSection" style="margin-top: 30px; display: none;">
-            <div class="card-header">
-                <span class="material-symbols-outlined">pause_circle</span>
-                <h2>Bản dịch đã tạm dừng</h2>
-                <button class="btn btn-secondary" onclick="loadResumableJobs()" title="Làm mới danh sách" style="margin-left: auto; padding: 0.5rem 1rem;">
-                    <span class="material-symbols-outlined">refresh</span>
-                </button>
+        </div><!-- /app-grid -->
+
+        <!-- Bottom row: Resumable + File Management (collapsible, compact) -->
+        <div class="main-card bottom-card" id="resumableJobsSection" style="display: none;">
+            <div class="prompt-options-toggle" onclick="toggleResumableJobs()">
+                <span style="display: flex; align-items: center; gap: 0.75rem;">
+                    <span class="material-symbols-outlined">pause_circle</span>
+                    <span>Bản dịch đã tạm dừng</span>
+                </span>
+                <span style="display: flex; align-items: center; gap: 0.5rem;">
+                    <button class="btn btn-secondary" onclick="event.stopPropagation(); loadResumableJobs()" title="Làm mới danh sách" style="padding: 0.3rem 0.6rem;">
+                        <span class="material-symbols-outlined" style="font-size: 1rem;">refresh</span>
+                    </button>
+                    <span id="resumableJobsIcon" class="material-symbols-outlined">expand_more</span>
+                </span>
             </div>
 
-            <div class="card-body">
+            <div id="resumableJobsBody" class="hidden" style="padding: 1rem 1.25rem;">
                 <div id="resumableJobsContainer">
-                    <div id="resumableJobsLoading" style="text-align: center; padding: 20px;">
+                    <div id="resumableJobsLoading" style="text-align: center; padding: 12px;">
                         <p>Đang tải...</p>
                     </div>
 
@@ -553,41 +565,49 @@
                         <!-- Jobs will be inserted here -->
                     </div>
 
-                    <div id="resumableJobsEmpty" style="text-align: center; padding: 40px; display: none;">
+                    <div id="resumableJobsEmpty" style="text-align: center; padding: 20px; display: none;">
                         <p style="color: var(--text-muted-light);">Không có bản dịch đã tạm dừng</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- File Management Section -->
-        <div class="main-card" style="margin-top: 30px;">
-            <div class="card-header">
-                <span class="material-symbols-outlined">folder_open</span>
-                <h2>Quản lý file</h2>
-                <button class="btn btn-secondary" onclick="refreshFileList()" title="Làm mới danh sách file" style="margin-left: auto; padding: 0.5rem 1rem;">
-                    <span class="material-symbols-outlined">refresh</span>
-                </button>
+        <!-- File Management Section (compact, collapsible) -->
+        <div class="main-card bottom-card">
+            <div class="prompt-options-toggle" onclick="toggleFileManagement()">
+                <span style="display: flex; align-items: center; gap: 0.75rem;">
+                    <span class="material-symbols-outlined">folder_open</span>
+                    <span>Quản lý file</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted-light); font-weight: 500;">
+                        (<span id="totalFileCount">0</span> file · <span id="totalFileSize">0 MB</span>)
+                    </span>
+                </span>
+                <span style="display: flex; align-items: center; gap: 0.5rem;">
+                    <button class="btn btn-secondary" onclick="event.stopPropagation(); refreshFileList()" title="Làm mới danh sách file" style="padding: 0.3rem 0.6rem;">
+                        <span class="material-symbols-outlined" style="font-size: 1rem;">refresh</span>
+                    </button>
+                    <span id="fileManagementIcon" class="material-symbols-outlined">expand_more</span>
+                </span>
             </div>
 
-            <div class="card-body">
+            <div id="fileManagementBody" class="hidden" style="padding: 1rem 1.25rem;">
                 <div id="fileManagementSection">
-                    <div class="file-actions" style="margin-bottom: 20px; display: flex; gap: 10px;">
-                        <button class="btn btn-primary" disabled id="batchDownloadBtn">
-                            <span class="material-symbols-outlined">download</span>
-                            Tải xuống đã chọn (Zip)
+                    <div class="file-actions" style="margin-bottom: 12px; display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button class="btn btn-primary" disabled id="batchDownloadBtn" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                            <span class="material-symbols-outlined" style="font-size: 1rem;">download</span>
+                            Tải xuống (Zip)
                         </button>
-                        <button class="btn btn-danger" disabled id="batchDeleteBtn">
-                            <span class="material-symbols-outlined">delete</span>
-                            Xóa đã chọn
+                        <button class="btn btn-danger" disabled id="batchDeleteBtn" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+                            <span class="material-symbols-outlined" style="font-size: 1rem;">delete</span>
+                            Xóa
                         </button>
-                        <label style="margin-left: auto; display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                        <label style="margin-left: auto; display: flex; align-items: center; gap: 5px; cursor: pointer; font-size: 0.85rem;">
                             <input type="checkbox" id="selectAllFiles">
                             Chọn tất cả
                         </label>
                     </div>
 
-                    <div id="fileListLoading" style="text-align: center; padding: 20px;">
+                    <div id="fileListLoading" style="text-align: center; padding: 12px;">
                         <p>Đang tải files...</p>
                     </div>
 
@@ -604,16 +624,9 @@
                             </tbody>
                         </table>
 
-                        <div id="fileListEmpty" style="text-align: center; padding: 40px; display: none;">
+                        <div id="fileListEmpty" style="text-align: center; padding: 20px; display: none;">
                             <p style="color: var(--text-muted-light);">Không tìm thấy file trong thư mục đã dịch</p>
                         </div>
-                    </div>
-
-                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-light);">
-                        <p style="color: var(--text-muted-light); font-size: 0.875rem;">
-                            <strong>Tổng:</strong> <span id="totalFileCount">0</span> file,
-                            <span id="totalFileSize">0 MB</span>
-                        </p>
                     </div>
                 </div>
             </div>
