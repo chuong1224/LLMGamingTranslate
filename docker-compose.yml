@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   translate-book:
-    image: ghcr.io/hydropix/translatebookswithllms:latest
+    image: ghcr.io/chuong1224/llmgamingtranslate:latest
     ports:
       - "5000:5000"
     environment:

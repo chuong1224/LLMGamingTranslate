@@ -555,7 +555,7 @@ def cmd_wiki_publish(args: argparse.Namespace) -> int:
             return 1
 
         print(colored("\nWiki published successfully!", Colors.GREEN))
-        print(colored(f"View at: https://github.com/hydropix/TranslateBookWithLLM/wiki", Colors.CYAN))
+        print(colored(f"View at: https://github.com/chuong1224/llmgamingtranslate/wiki", Colors.CYAN))
 
         return 0
 

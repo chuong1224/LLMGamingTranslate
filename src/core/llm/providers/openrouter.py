@@ -228,7 +228,7 @@ class OpenRouterProvider(LLMProvider):
         headers = {
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://github.com/hydropix/TranslateBookWithLLM",
+            "HTTP-Referer": "https://github.com/chuong1224/llmgamingtranslate",
             "X-Title": "TranslateBookWithLLM",
         }
 

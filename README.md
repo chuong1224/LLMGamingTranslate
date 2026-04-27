@@ -34,7 +34,7 @@ Nhà cung cấp:
 - [**DeepSeek**](https://platform.deepseek.com/api_keys)
 - [**Gemini**](https://aistudio.google.com/apikey)
 
-> **[Đánh giá chất lượng dịch thuật](https://github.com/hydropix/TranslateBooksWithLLMs/wiki)** — Tìm mô hình tốt nhất cho ngôn ngữ đích của bạn.
+> **[Đánh giá chất lượng dịch thuật](https://github.com/chuong1224/llmgamingtranslate/wiki)** — Tìm mô hình tốt nhất cho ngôn ngữ đích của bạn.
 
 ---
 
@@ -42,16 +42,14 @@ Nhà cung cấp:
 
 ### Tải file thực thi (Không cần Python!)
 
-[![Tải Windows](https://img.shields.io/badge/Tải-Windows-blue?style=for-the-badge&logo=windows)](https://github.com/hydropix/TranslateBooksWithLLMs/releases/latest/download/TranslateBook-Windows.zip) [![Tải macOS Intel](https://img.shields.io/badge/Tải-macOS%20Intel-black?style=for-the-badge&logo=apple)](https://github.com/hydropix/TranslateBooksWithLLMs/releases/latest/download/TranslateBook-macOS-Intel.zip) [![Tải macOS Apple Silicon](https://img.shields.io/badge/Tải-macOS%20M1%2FM2%2FM3%2FM4-black?style=for-the-badge&logo=apple)](https://github.com/hydropix/TranslateBooksWithLLMs/releases/latest/download/TranslateBook-macOS-AppleSilicon.zip)
+[![Tải Windows](https://img.shields.io/badge/Tải-Windows-blue?style=for-the-badge&logo=windows)](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/TranslateBook-Windows.zip)
 
-1. Tải và giải nén file cho nền tảng của bạn
-2. Cài đặt [Ollama](https://ollama.com/) (cho các mô hình AI chạy cục bộ)
-3. Chạy `TranslateBook.exe` (Windows) hoặc `./TranslateBook` (macOS)
+1. Tải và giải nén file zip
+2. Cài đặt [Ollama](https://ollama.com/) (nếu muốn chạy mô hình AI cục bộ; bỏ qua nếu chỉ dùng API đám mây)
+3. Chạy `TranslateBook.exe`
 4. Mở http://localhost:5000 trên trình duyệt
 
 > **Lưu ý:** Lần chạy đầu tiên sẽ tạo thư mục `TranslateBook_Data` chứa các file cấu hình.
->
-> **macOS:** Lần đầu khởi chạy, vào System Settings > Privacy & Security và nhấn "Open Anyway".
 
 ---
 
@@ -60,8 +58,8 @@ Nhà cung cấp:
 **Yêu cầu:** [Python 3.8+](https://www.python.org/downloads/), [Ollama](https://ollama.com/), [Git](https://git-scm.com/)
 
 ```bash
-git clone https://github.com/hydropix/TranslateBooksWithLLMs.git
-cd TranslateBookWithLLM
+git clone https://github.com/chuong1224/llmgamingtranslate.git
+cd llmgamingtranslate
 ollama pull qwen3:14b    # Tải mô hình
 
 # Windows
@@ -194,7 +192,7 @@ Xem [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) để biết thêm giải
 
 ## Liên kết
 
-- [Báo cáo sự cố](https://github.com/hydropix/TranslateBooksWithLLMs/issues)
+- [Báo cáo sự cố](https://github.com/chuong1224/llmgamingtranslate/issues)
 - [Các mô hình OpenRouter](https://openrouter.ai/models)
 
 ---
@@ -240,7 +238,7 @@ Providers:
 - [**DeepSeek**](https://platform.deepseek.com/api_keys)
 - [**Gemini**](https://aistudio.google.com/apikey)
 
-> **[Translation Quality Benchmarks](https://github.com/hydropix/TranslateBooksWithLLMs/wiki)** — Find the best model for your target language.
+> **[Translation Quality Benchmarks](https://github.com/chuong1224/llmgamingtranslate/wiki)** — Find the best model for your target language.
 
 ---
 
@@ -248,16 +246,14 @@ Providers:
 
 ### Download Executable (No Python Required!)
 
-[![Download Windows](https://img.shields.io/badge/Download-Windows-blue?style=for-the-badge&logo=windows)](https://github.com/hydropix/TranslateBooksWithLLMs/releases/latest/download/TranslateBook-Windows.zip) [![Download macOS Intel](https://img.shields.io/badge/Download-macOS%20Intel-black?style=for-the-badge&logo=apple)](https://github.com/hydropix/TranslateBooksWithLLMs/releases/latest/download/TranslateBook-macOS-Intel.zip) [![Download macOS Apple Silicon](https://img.shields.io/badge/Download-macOS%20M1%2FM2%2FM3%2FM4-black?style=for-the-badge&logo=apple)](https://github.com/hydropix/TranslateBooksWithLLMs/releases/latest/download/TranslateBook-macOS-AppleSilicon.zip)
+[![Download Windows](https://img.shields.io/badge/Download-Windows-blue?style=for-the-badge&logo=windows)](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/TranslateBook-Windows.zip)
 
-1. Download and extract the archive for your platform
-2. Install [Ollama](https://ollama.com/) (for local AI models)
-3. Run `TranslateBook.exe` (Windows) or `./TranslateBook` (macOS)
+1. Download and extract the zip
+2. Install [Ollama](https://ollama.com/) (only if you want to run local AI models; skip if you only use cloud APIs)
+3. Run `TranslateBook.exe`
 4. Open http://localhost:5000 in your browser
 
 > **Note:** First run creates a `TranslateBook_Data` folder with configuration files.
->
-> **macOS:** On first launch, go to System Settings > Privacy & Security and click "Open Anyway".
 
 ---
 
@@ -266,8 +262,8 @@ Providers:
 **Prerequisites:** [Python 3.8+](https://www.python.org/downloads/), [Ollama](https://ollama.com/), [Git](https://git-scm.com/)
 
 ```bash
-git clone https://github.com/hydropix/TranslateBooksWithLLMs.git
-cd TranslateBookWithLLM
+git clone https://github.com/chuong1224/llmgamingtranslate.git
+cd llmgamingtranslate
 ollama pull qwen3:14b    # Download a model
 
 # Windows
@@ -400,7 +396,7 @@ See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for more solutions.
 
 ## Links
 
-- [Report Issues](https://github.com/hydropix/TranslateBooksWithLLMs/issues)
+- [Report Issues](https://github.com/chuong1224/llmgamingtranslate/issues)
 - [OpenRouter Models](https://openrouter.ai/models)
 
 ---

@@ -31,7 +31,7 @@ class TelemetryCollector:
 
     # Application identification
     GENERATOR_NAME = "TranslateBookWithLLM"
-    SOURCE_REPOSITORY = "https://github.com/hydropix/TranslateBookWithLLM"
+    SOURCE_REPOSITORY = "https://github.com/chuong1224/llmgamingtranslate"
     TELEMETRY_VERSION = "1.0.0"
 
     def __init__(self):

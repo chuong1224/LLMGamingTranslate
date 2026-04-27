@@ -420,7 +420,7 @@ The system uses structured logging with types:
 2. **Enable debug mode** (`DEBUG_MODE=true`) for detailed logs
 3. **Test with a small file** first to isolate issues
 4. **Review console/terminal logs** for error messages
-5. **Open an issue**: [GitHub Issues](https://github.com/hydropix/TranslateBookWithLLM/issues)
+5. **Open an issue**: [GitHub Issues](https://github.com/chuong1224/llmgamingtranslate/issues)
 
 ### When reporting issues, include:
 

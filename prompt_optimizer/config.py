@@ -40,7 +40,7 @@ class OpenRouterConfig:
     model: str = "anthropic/claude-sonnet-4"
     api_key: str = ""
     timeout: int = 60
-    site_url: str = "https://github.com/hydropix/TranslateBookWithLLM"
+    site_url: str = "https://github.com/chuong1224/llmgamingtranslate"
     site_name: str = "PromptOptimizer"
 
 

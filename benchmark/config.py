@@ -145,7 +145,7 @@ class PathConfig:
     wiki_repo_url: str = field(
         default_factory=lambda: os.getenv(
             "WIKI_REPO_URL",
-            "https://github.com/hydropix/TranslateBookWithLLM.wiki.git"
+            "https://github.com/chuong1224/llmgamingtranslate.wiki.git"
         )
     )
 

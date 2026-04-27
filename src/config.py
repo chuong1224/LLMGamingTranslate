@@ -220,7 +220,7 @@ SRT_MAX_CHARS_PER_BLOCK = int(os.getenv('SRT_MAX_CHARS_PER_BLOCK', '500'))
 # The attribution is non-intrusive and placed at the end of files. Thank you for your support!
 ATTRIBUTION_ENABLED = os.getenv('ATTRIBUTION_ENABLED', os.getenv('SIGNATURE_ENABLED', 'true')).lower() == 'true'
 GENERATOR_NAME = "TranslateBook with LLM (TBL)"
-GENERATOR_SOURCE = "https://github.com/hydropix/TranslateBookWithLLM"
+GENERATOR_SOURCE = "https://github.com/chuong1224/llmgamingtranslate"
 METADATA_VERSION = "1.0"
 
 # Default languages from environment (optional)
