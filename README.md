@@ -33,8 +33,18 @@ Nhà cung cấp:
 - [**Mistral**](https://console.mistral.ai/api-keys)
 - [**DeepSeek**](https://platform.deepseek.com/api_keys)
 - [**Gemini**](https://aistudio.google.com/apikey)
+- [**NVIDIA NIM**](https://build.nvidia.com/) (đám mây - Llama, Mistral, ...)
 
 > **[Đánh giá chất lượng dịch thuật](https://github.com/chuong1224/llmgamingtranslate/wiki)** — Tìm mô hình tốt nhất cho ngôn ngữ đích của bạn.
+
+---
+
+## Phiên bản mới nhất — [v0.1.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.1.0)
+
+- 🎉 Bản cài đặt Windows đầu tiên: **[Tải TranslateBook-Windows.zip](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/TranslateBook-Windows.zip)** (~27 MB, không cần Python).
+- 🇻🇳 Việt hoá toàn bộ giao diện web, sắp xếp gọn vừa 1 màn hình.
+- 🛠 Sửa lỗi *"API chưa thiết lập"* khi chọn DeepSeek / Mistral / Poe / NVIDIA NIM cho dịch file đơn (lỗi không gửi API key xuống backend).
+- ✨ Thêm provider NVIDIA NIM (Llama, Mistral hosted miễn phí).
 
 ---
 
@@ -85,6 +95,7 @@ Giao diện web mở tại **http://localhost:5000**
 | **Mistral** | Đám mây | [console.mistral.ai](https://console.mistral.ai/api-keys) |
 | **DeepSeek** | Đám mây | [platform.deepseek.com](https://platform.deepseek.com/api_keys) |
 | **Gemini** | Đám mây | [Google AI Studio](https://makersuite.google.com/app/apikey) |
+| **NVIDIA NIM** | Đám mây | [build.nvidia.com](https://build.nvidia.com/) |
 
 > **Máy chủ tương thích OpenAI:** Dùng `--provider openai` với endpoint của máy chủ (ví dụ: llama.cpp: `http://localhost:8080/v1/chat/completions`, LM Studio: `http://localhost:1234/v1/chat/completions`)
 
@@ -124,7 +135,7 @@ python translate.py -i book.txt --provider openai \
 | `-sl, --source_lang` | Ngôn ngữ nguồn | English |
 | `-tl, --target_lang` | Ngôn ngữ đích | Chinese |
 | `-m, --model` | Tên mô hình | mistral-small:24b |
-| `--provider` | ollama/openrouter/openai/gemini | ollama |
+| `--provider` | ollama / poe / openrouter / openai / gemini / mistral / deepseek / nim | ollama |
 | `--text-cleanup` | Làm sạch OCR/ký tự in | tắt |
 | `--refine` | Lượt thứ hai để đánh bóng văn học | tắt |
 | `--tts` | Tạo âm thanh (Edge-TTS) | tắt |
@@ -149,6 +160,10 @@ DEFAULT_MODEL=mistral-small:24b
 OPENROUTER_API_KEY=sk-or-v1-...
 OPENAI_API_KEY=sk-...
 GEMINI_API_KEY=...
+MISTRAL_API_KEY=...
+DEEPSEEK_API_KEY=...
+POE_API_KEY=...
+NIM_API_KEY=...
 
 # Hiệu suất
 REQUEST_TIMEOUT=900
@@ -237,8 +252,18 @@ Providers:
 - [**Mistral**](https://console.mistral.ai/api-keys)
 - [**DeepSeek**](https://platform.deepseek.com/api_keys)
 - [**Gemini**](https://aistudio.google.com/apikey)
+- [**NVIDIA NIM**](https://build.nvidia.com/) (cloud - Llama, Mistral, ...)
 
 > **[Translation Quality Benchmarks](https://github.com/chuong1224/llmgamingtranslate/wiki)** — Find the best model for your target language.
+
+---
+
+## Latest release — [v0.1.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.1.0)
+
+- 🎉 First Windows build: **[Download TranslateBook-Windows.zip](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/TranslateBook-Windows.zip)** (~27 MB, no Python required).
+- 🇻🇳 Full Vietnamese UI translation, layout fits one screen.
+- 🛠 Fixed *"API not configured"* error when using DeepSeek / Mistral / Poe / NVIDIA NIM with single-file translation (API key was not forwarded to backend).
+- ✨ Added NVIDIA NIM provider (Llama, Mistral hosted free).
 
 ---
 
@@ -289,6 +314,7 @@ The web interface opens at **http://localhost:5000**
 | **Mistral** | Cloud | [console.mistral.ai](https://console.mistral.ai/api-keys) |
 | **DeepSeek** | Cloud | [platform.deepseek.com](https://platform.deepseek.com/api_keys) |
 | **Gemini** | Cloud | [Google AI Studio](https://makersuite.google.com/app/apikey) |
+| **NVIDIA NIM** | Cloud | [build.nvidia.com](https://build.nvidia.com/) |
 
 > **OpenAI-Compatible servers:** Use `--provider openai` with your server's endpoint (e.g., llama.cpp: `http://localhost:8080/v1/chat/completions`, LM Studio: `http://localhost:1234/v1/chat/completions`)
 
@@ -328,7 +354,7 @@ python translate.py -i book.txt --provider openai \
 | `-sl, --source_lang` | Source language | English |
 | `-tl, --target_lang` | Target language | Chinese |
 | `-m, --model` | Model name | mistral-small:24b |
-| `--provider` | ollama/openrouter/openai/gemini | ollama |
+| `--provider` | ollama / poe / openrouter / openai / gemini / mistral / deepseek / nim | ollama |
 | `--text-cleanup` | OCR/typographic cleanup | disabled |
 | `--refine` | Second pass for literary polish | disabled |
 | `--tts` | Generate audio (Edge-TTS) | disabled |
@@ -353,6 +379,10 @@ DEFAULT_MODEL=mistral-small:24b
 OPENROUTER_API_KEY=sk-or-v1-...
 OPENAI_API_KEY=sk-...
 GEMINI_API_KEY=...
+MISTRAL_API_KEY=...
+DEEPSEEK_API_KEY=...
+POE_API_KEY=...
+NIM_API_KEY=...
 
 # Performance
 REQUEST_TIMEOUT=900
