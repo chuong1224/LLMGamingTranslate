@@ -114,13 +114,13 @@ jobs:
         $readme | Out-File -FilePath release\README.txt -Encoding UTF8
 
         # Create zip archive
-        Compress-Archive -Path release\* -DestinationPath TranslateBook-Windows.zip
+        Compress-Archive -Path release\* -DestinationPath ChuongPV_LlmTranslate.zip
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: TranslateBook-Windows
-        path: TranslateBook-Windows.zip
+        name: ChuongPV_LlmTranslate
+        path: ChuongPV_LlmTranslate.zip
         retention-days: 90
 
     - name: Upload executable only
@@ -138,19 +138,19 @@ jobs:
         echo "**Executable Size:** ${{ steps.exe_info.outputs.size_mb }} MB" >> $env:GITHUB_STEP_SUMMARY
         echo "" >> $env:GITHUB_STEP_SUMMARY
         echo "**Artifacts:**" >> $env:GITHUB_STEP_SUMMARY
-        echo "- TranslateBook-Windows.zip (executable + README)" >> $env:GITHUB_STEP_SUMMARY
+        echo "- ChuongPV_LlmTranslate.zip (executable + README)" >> $env:GITHUB_STEP_SUMMARY
         echo "- TranslateBook.exe (standalone)" >> $env:GITHUB_STEP_SUMMARY
 
     - name: Create Release (on tag)
       if: startsWith(github.ref, 'refs/tags/v')
       uses: softprops/action-gh-release@v1
       with:
-        files: TranslateBook-Windows.zip
+        files: ChuongPV_LlmTranslate.zip
         body: |
           ## Windows Executable Release
 
           ### Installation
-          1. Download and extract TranslateBook-Windows.zip
+          1. Download and extract ChuongPV_LlmTranslate.zip
           2. Install [Ollama](https://ollama.ai) (required for local LLM)
           3. Run TranslateBook.exe
           4. Open http://localhost:5000 in your browser

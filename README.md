@@ -41,7 +41,7 @@ Nhà cung cấp:
 
 ## Phiên bản mới nhất — [v0.1.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.1.0)
 
-- 🎉 Bản cài đặt Windows đầu tiên: **[Tải TranslateBook-Windows.zip](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/TranslateBook-Windows.zip)** (~27 MB, không cần Python).
+- 🎉 Bản cài đặt Windows đầu tiên: **[Tải ChuongPV_LlmTranslate.zip](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/ChuongPV_LlmTranslate.zip)** (~27 MB, không cần Python).
 - 🇻🇳 Việt hoá toàn bộ giao diện web, sắp xếp gọn vừa 1 màn hình.
 - 🛠 Sửa lỗi *"API chưa thiết lập"* khi chọn DeepSeek / Mistral / Poe / NVIDIA NIM cho dịch file đơn (lỗi không gửi API key xuống backend).
 - ✨ Thêm provider NVIDIA NIM (Llama, Mistral hosted miễn phí).
@@ -52,7 +52,7 @@ Nhà cung cấp:
 
 ### Tải file thực thi (Không cần Python!)
 
-[![Tải Windows](https://img.shields.io/badge/Tải-Windows-blue?style=for-the-badge&logo=windows)](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/TranslateBook-Windows.zip)
+[![Tải Windows](https://img.shields.io/badge/Tải-Windows-blue?style=for-the-badge&logo=windows)](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/ChuongPV_LlmTranslate.zip)
 
 1. Tải và giải nén file zip
 2. Cài đặt [Ollama](https://ollama.com/) (nếu muốn chạy mô hình AI cục bộ; bỏ qua nếu chỉ dùng API đám mây)
@@ -260,7 +260,7 @@ Providers:
 
 ## Latest release — [v0.1.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.1.0)
 
-- 🎉 First Windows build: **[Download TranslateBook-Windows.zip](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/TranslateBook-Windows.zip)** (~27 MB, no Python required).
+- 🎉 First Windows build: **[Download ChuongPV_LlmTranslate.zip](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/ChuongPV_LlmTranslate.zip)** (~27 MB, no Python required).
 - 🇻🇳 Full Vietnamese UI translation, layout fits one screen.
 - 🛠 Fixed *"API not configured"* error when using DeepSeek / Mistral / Poe / NVIDIA NIM with single-file translation (API key was not forwarded to backend).
 - ✨ Added NVIDIA NIM provider (Llama, Mistral hosted free).
@@ -271,7 +271,7 @@ Providers:
 
 ### Download Executable (No Python Required!)
 
-[![Download Windows](https://img.shields.io/badge/Download-Windows-blue?style=for-the-badge&logo=windows)](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/TranslateBook-Windows.zip)
+[![Download Windows](https://img.shields.io/badge/Download-Windows-blue?style=for-the-badge&logo=windows)](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/ChuongPV_LlmTranslate.zip)
 
 1. Download and extract the zip
 2. Install [Ollama](https://ollama.com/) (only if you want to run local AI models; skip if you only use cloud APIs)
