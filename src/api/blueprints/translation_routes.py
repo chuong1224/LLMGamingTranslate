@@ -78,6 +78,10 @@ def create_translation_blueprint(state_manager, start_translation_job):
             'gemini_api_key': _resolve_api_key(data.get('gemini_api_key'), 'GEMINI_API_KEY'),
             'openai_api_key': _resolve_api_key(data.get('openai_api_key'), 'OPENAI_API_KEY'),
             'openrouter_api_key': _resolve_api_key(data.get('openrouter_api_key'), 'OPENROUTER_API_KEY'),
+            'mistral_api_key': _resolve_api_key(data.get('mistral_api_key'), 'MISTRAL_API_KEY'),
+            'deepseek_api_key': _resolve_api_key(data.get('deepseek_api_key'), 'DEEPSEEK_API_KEY'),
+            'poe_api_key': _resolve_api_key(data.get('poe_api_key'), 'POE_API_KEY'),
+            'nim_api_key': _resolve_api_key(data.get('nim_api_key'), 'NIM_API_KEY'),
             # Prompt options (optional instructions to include in the system prompt)
             'prompt_options': data.get('prompt_options', {}),
             # Bilingual output (original + translation interleaved)

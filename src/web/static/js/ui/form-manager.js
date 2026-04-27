@@ -665,6 +665,10 @@ export const FormManager = {
         const geminiApiKey = provider === 'gemini' ? ApiKeyUtils.getValue('geminiApiKey') : '';
         const openaiApiKey = provider === 'openai' ? ApiKeyUtils.getValue('openaiApiKey') : '';
         const openrouterApiKey = provider === 'openrouter' ? ApiKeyUtils.getValue('openrouterApiKey') : '';
+        const mistralApiKey = provider === 'mistral' ? ApiKeyUtils.getValue('mistralApiKey') : '';
+        const deepseekApiKey = provider === 'deepseek' ? ApiKeyUtils.getValue('deepseekApiKey') : '';
+        const poeApiKey = provider === 'poe' ? ApiKeyUtils.getValue('poeApiKey') : '';
+        const nimApiKey = provider === 'nim' ? ApiKeyUtils.getValue('nimApiKey') : '';
 
         // Get TTS configuration
         const ttsEnabled = DomHelpers.getElement('ttsEnabled')?.checked || false;
@@ -678,6 +682,10 @@ export const FormManager = {
             gemini_api_key: geminiApiKey,
             openai_api_key: openaiApiKey,
             openrouter_api_key: openrouterApiKey,
+            mistral_api_key: mistralApiKey,
+            deepseek_api_key: deepseekApiKey,
+            poe_api_key: poeApiKey,
+            nim_api_key: nimApiKey,
             // Prompt options (optional system prompt instructions)
             // Technical content protection is always enabled
             prompt_options: {
