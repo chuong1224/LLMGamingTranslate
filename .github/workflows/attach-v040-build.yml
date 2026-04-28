@@ -1,0 +1,89 @@
+name: Attach Build to v0.4.0 Release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/attach-v040-build.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-attach:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout v0.4.0 tag
+        uses: actions/checkout@v4
+        with:
+          ref: v0.4.0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build executable
+        run: |
+          pyinstaller --clean build/windows/TranslateBook.spec
+
+      - name: Create release archive
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path release -Force
+          Copy-Item dist\TranslateBook.exe release\
+
+          $readme = @"
+          # TranslateBook v0.4.0 - Windows Executable
+
+          ## Quick Start
+
+          1. Extract TranslateBook.exe to a folder of your choice
+          2. Double-click TranslateBook.exe to start the server
+          3. Open your browser to http://localhost:5000
+          4. Choose your LLM provider and start translating!
+
+          ## What's Fixed in v0.4.0
+
+          - Download button in File Management no longer fails with 404 / "Download failed"
+          - Activity log (Nhat ky hoat dong) now stays in sync with the backend log
+          - Upload status banner clears after success instead of being stuck on "Dang tai len..."
+
+          ## Supported Formats
+
+          TXT, EPUB, SRT, DOCX, XLSX
+
+          ## LLM Providers
+
+          - Poe (Recommended): https://poe.com/api_key
+          - Ollama (Local/Free): https://ollama.com
+          - OpenRouter: https://openrouter.ai/keys
+          - OpenAI: https://platform.openai.com/api-keys
+          - Gemini: https://aistudio.google.com/apikey
+          - Mistral: https://console.mistral.ai/api-keys
+          - DeepSeek: https://platform.deepseek.com/api_keys
+
+          ## Links
+
+          - Documentation: https://github.com/chuong1224/llmgamingtranslate
+          - Report Issues: https://github.com/chuong1224/llmgamingtranslate/issues
+          "@
+
+          $readme | Out-File -FilePath release\README.txt -Encoding UTF8
+          Compress-Archive -Path release\* -DestinationPath ChuongPV_LlmTranslate.zip
+
+      - name: Attach zip to v0.4.0 release
+        shell: bash
+        run: |
+          gh release upload v0.4.0 ChuongPV_LlmTranslate.zip --clobber
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
