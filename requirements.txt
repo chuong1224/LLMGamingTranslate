@@ -19,6 +19,9 @@ Pillow>=10.0.0
 mammoth>=1.0.0
 python-docx>=1.1.0
 
+# Excel support
+openpyxl>=3.1.0
+
 # Chatterbox TTS (GPU-accelerated local TTS) - OPTIONAL
 # These dependencies have strict numpy version requirements that may conflict.
 # Install separately if needed:

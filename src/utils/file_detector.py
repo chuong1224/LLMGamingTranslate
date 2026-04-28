@@ -15,7 +15,7 @@ import zipfile
 from typing import Literal, Optional, Tuple
 from pathlib import Path
 
-FileType = Literal["txt", "epub", "srt", "docx"]
+FileType = Literal["txt", "epub", "srt", "docx", "xlsx"]
 
 # Known text file extensions that should be treated as plain text
 KNOWN_TEXT_EXTENSIONS = {
@@ -28,7 +28,9 @@ KNOWN_TEXT_EXTENSIONS = {
 PROCESSOR_EXTENSIONS = {
     '.epub': 'epub',
     '.srt': 'srt',
-    '.docx': 'docx'
+    '.docx': 'docx',
+    '.xlsx': 'xlsx',
+    '.xls': 'xlsx',
 }
 
 
@@ -70,7 +72,7 @@ def detect_file_type(file_path: str) -> FileType:
     # Could not determine type
     raise ValueError(
         f"Cannot determine file type for: {ext}. "
-        f"Supported types: .txt, .epub, .srt, .docx, "
+        f"Supported types: .txt, .epub, .srt, .docx, .xlsx, "
         f"or plain text files with any extension."
     )
 
@@ -169,6 +171,12 @@ def _identify_zip_format(file_path: str) -> Optional[FileType]:
                 has_word = any(n.startswith('word/') for n in namelist)
                 if has_word:
                     return 'docx'
+
+            # XLSX: has [Content_Types].xml and xl/ directory
+            if '[Content_Types].xml' in namelist:
+                has_xl = any(n.startswith('xl/') for n in namelist)
+                if has_xl:
+                    return 'xlsx'
 
         return None
 

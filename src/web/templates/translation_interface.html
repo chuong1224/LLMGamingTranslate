@@ -188,13 +188,19 @@
 
                 <!-- File Upload Area -->
                 <div class="file-upload" id="fileUpload" onclick="document.getElementById('fileInput').click()">
-                    <div class="upload-icon">
-                        <span class="material-symbols-outlined">cloud_upload</span>
+                    <div class="drag-overlay">
+                        <span class="material-symbols-outlined">download</span>
+                        Thả file vào đây
                     </div>
-                    <h3>Thả file để dịch</h3>
-                    <p>Hỗ trợ TXT, EPUB, SRT và DOCX</p>
+                    <div class="upload-icon">
+                        <span class="material-symbols-outlined">upload_file</span>
+                    </div>
+                    <div class="upload-text">
+                        <h3>Thả file hoặc nhấn để chọn</h3>
+                        <p>Hỗ trợ TXT, EPUB, SRT, DOCX, XLSX</p>
+                    </div>
                     <div class="browse-btn">Chọn File</div>
-                    <input type="file" id="fileInput" accept=".txt,.epub,.srt,.docx" style="display: none;" onchange="handleFileSelect(event)" multiple>
+                    <input type="file" id="fileInput" accept=".txt,.epub,.srt,.docx,.xlsx,.xls" style="display: none;" onchange="handleFileSelect(event)" multiple>
                 </div>
 
                 <!-- Settings (Collapsible) -->
