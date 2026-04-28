@@ -288,6 +288,8 @@ class SecureFileHandler:
                 '.epub': self._validate_epub_file,
                 '.srt': self._validate_srt_file,
                 '.docx': self._validate_docx_file,
+                '.xlsx': self._validate_xlsx_file,
+                '.xls': self._validate_xlsx_file,
             }
 
             # Check if we have a dedicated validator for this extension
@@ -308,6 +310,8 @@ class SecureFileHandler:
                 return self._validate_docx_file(file_path)
             elif detected_type == 'srt':
                 return self._validate_srt_file(file_path)
+            elif detected_type == 'xlsx':
+                return self._validate_xlsx_file(file_path)
             elif detected_type == 'txt':
                 # Validated as readable text
                 result = self._validate_text_file(file_path)
@@ -557,6 +561,56 @@ class SecureFileHandler:
             return FileValidationResult(
                 is_valid=False,
                 error_message=f"DOCX validation failed: {str(e)}"
+            )
+
+    def _validate_xlsx_file(self, file_path: Path) -> FileValidationResult:
+        """Validate XLSX file structure"""
+        warnings = []
+
+        try:
+            import zipfile
+
+            if not zipfile.is_zipfile(file_path):
+                return FileValidationResult(
+                    is_valid=False,
+                    error_message="XLSX file is not a valid ZIP archive"
+                )
+
+            with zipfile.ZipFile(file_path, 'r') as xlsx_zip:
+                file_list = xlsx_zip.namelist()
+
+                has_content_types = '[Content_Types].xml' in file_list
+                has_xl = any(f.startswith('xl/') for f in file_list)
+
+                if not has_content_types:
+                    warnings.append("Missing [Content_Types].xml file")
+                if not has_xl:
+                    return FileValidationResult(
+                        is_valid=False,
+                        error_message="Invalid XLSX: missing xl/ directory"
+                    )
+
+                if len(file_list) > 10000:
+                    return FileValidationResult(
+                        is_valid=False,
+                        error_message="XLSX contains too many files (potential zip bomb)"
+                    )
+
+                suspicious_exts = {'.exe', '.bat', '.cmd', '.scr', '.com', '.pif', '.jar'}
+                for file_name in file_list:
+                    file_ext = Path(file_name).suffix.lower()
+                    if file_ext in suspicious_exts:
+                        return FileValidationResult(
+                            is_valid=False,
+                            error_message=f"XLSX contains suspicious file: {file_name}"
+                        )
+
+            return FileValidationResult(is_valid=True, warnings=warnings)
+
+        except Exception as e:
+            return FileValidationResult(
+                is_valid=False,
+                error_message=f"XLSX validation failed: {str(e)}"
             )
 
     def _cleanup_temp_file(self, temp_path: Path) -> None:
