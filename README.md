@@ -10,7 +10,7 @@ Dịch **sách**, **phụ đề**, và **tài liệu** bằng AI - chạy cục 
 
 **Tiếp tục bất cứ lúc nào.** Dịch bị gián đoạn? Tiếp tục ngay từ chỗ dừng. Hệ thống checkpoint tự động lưu tiến trình.
 
-Định dạng hỗ trợ: **EPUB**, **SRT**, **DOCX**, **TXT**
+Định dạng hỗ trợ: **EPUB**, **SRT**, **DOCX**, **XLSX**, **TXT**
 
 <img width="1240" height="1945" alt="image" src="https://github.com/user-attachments/assets/7b9769df-6833-410d-ae38-a5894ca415dd" />
 
@@ -39,11 +39,18 @@ Nhà cung cấp:
 
 ---
 
-## Phiên bản mới nhất — [v0.1.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.1.0)
+## Phiên bản mới nhất — [v0.2.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.2.0)
 
-- 🎉 Bản cài đặt Windows đầu tiên: **[Tải ChuongPV_LlmTranslate.zip](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/ChuongPV_LlmTranslate.zip)** (~27 MB, không cần Python).
+- 📊 **Hỗ trợ Excel (.xlsx / .xls)**: Dịch toàn bộ ô văn bản trong mọi sheet, giữ nguyên định dạng, công thức và ô số.
+- ✨ **Cải thiện UX kéo-thả file**: Vùng drop nhỏ gọn theo chiều ngang, overlay *"Thả file vào đây"* có animation khi kéo file vào, nhấp nháy xanh xác nhận sau khi thả.
+- 🪟 **Chỉ Windows**: Loại bỏ build script cho Mac/Linux — gói cài đặt nay chỉ dành cho Windows.
+- 📦 Tải bản mới: **[ChuongPV_LlmTranslate.zip](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/ChuongPV_LlmTranslate.zip)** (không cần cài Python).
+
+### Phiên bản trước — [v0.1.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.1.0)
+
+- 🎉 Bản cài đặt Windows đầu tiên (~27 MB, không cần Python).
 - 🇻🇳 Việt hoá toàn bộ giao diện web, sắp xếp gọn vừa 1 màn hình.
-- 🛠 Sửa lỗi *"API chưa thiết lập"* khi chọn DeepSeek / Mistral / Poe / NVIDIA NIM cho dịch file đơn (lỗi không gửi API key xuống backend).
+- 🛠 Sửa lỗi *"API chưa thiết lập"* khi chọn DeepSeek / Mistral / Poe / NVIDIA NIM cho dịch file đơn.
 - ✨ Thêm provider NVIDIA NIM (Llama, Mistral hosted miễn phí).
 
 ---
@@ -229,7 +236,7 @@ Translate **books**, **subtitles**, and **documents** using AI - locally or in t
 
 **Resume anytime.** Interrupted translation? Pick up exactly where you left off. The checkpoint system saves progress automatically.
 
-Formats: **EPUB**, **SRT**, **DOCX**, **TXT**
+Formats: **EPUB**, **SRT**, **DOCX**, **XLSX**, **TXT**
 
 <img width="1240" height="1945" alt="image" src="https://github.com/user-attachments/assets/7b9769df-6833-410d-ae38-a5894ca415dd" />
 
@@ -258,11 +265,18 @@ Providers:
 
 ---
 
-## Latest release — [v0.1.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.1.0)
+## Latest release — [v0.2.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.2.0)
 
-- 🎉 First Windows build: **[Download ChuongPV_LlmTranslate.zip](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/ChuongPV_LlmTranslate.zip)** (~27 MB, no Python required).
+- 📊 **Excel (.xlsx / .xls) support**: Translate all string cells across every sheet, keeping formatting, formulas and numeric cells untouched.
+- ✨ **Drag & drop UX upgrade**: Compact horizontal drop bar, animated *"Drop file here"* overlay while dragging, green flash confirmation after dropping.
+- 🪟 **Windows-only packaging**: Removed Mac/Linux build scripts — the bundled installer now targets Windows exclusively.
+- 📦 Download the new build: **[ChuongPV_LlmTranslate.zip](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/ChuongPV_LlmTranslate.zip)** (no Python required).
+
+### Previous release — [v0.1.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.1.0)
+
+- 🎉 First Windows build (~27 MB, no Python required).
 - 🇻🇳 Full Vietnamese UI translation, layout fits one screen.
-- 🛠 Fixed *"API not configured"* error when using DeepSeek / Mistral / Poe / NVIDIA NIM with single-file translation (API key was not forwarded to backend).
+- 🛠 Fixed *"API not configured"* error when using DeepSeek / Mistral / Poe / NVIDIA NIM for single-file translation.
 - ✨ Added NVIDIA NIM provider (Llama, Mistral hosted free).
 
 ---
