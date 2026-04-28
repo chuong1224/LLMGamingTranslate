@@ -51,11 +51,7 @@ def create_file_blueprint(output_dir):
             if not file_path:
                 return jsonify({"error": "File not found"}), 404
 
-            # Determine directory for send_from_directory
-            if file_path.parent == file_service.uploads_dir:
-                return send_from_directory(str(file_service.uploads_dir), filename, as_attachment=True)
-            else:
-                return send_from_directory(output_dir, filename, as_attachment=True)
+            return send_file(file_path.resolve(), as_attachment=True, download_name=file_path.name)
 
         except Exception as e:
             current_app.logger.error(f"Error downloading file {filename}: {str(e)}")
