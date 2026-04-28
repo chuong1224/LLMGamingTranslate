@@ -39,12 +39,17 @@ Nhà cung cấp:
 
 ---
 
-## Phiên bản mới nhất — [v0.2.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.2.0)
+## Phiên bản mới nhất — [v0.3.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.3.0)
+
+- 🔑 **Sửa badge Khóa API "NOT SET"**: Badge trạng thái cập nhật ngay thành "✓ Configured" sau khi lưu — không cần tải lại trang.
+- 📊 **Sửa lỗi tải lên file Excel**: Upload file `.xlsx` / `.xls` không còn báo *"Cannot determine file type"* — trình xác thực XLSX được thêm vào đúng chỗ.
+- 📦 Tải bản mới: **[ChuongPV_LlmTranslate.zip](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/ChuongPV_LlmTranslate.zip)** (không cần cài Python).
+
+### Phiên bản trước — [v0.2.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.2.0)
 
 - 📊 **Hỗ trợ Excel (.xlsx / .xls)**: Dịch toàn bộ ô văn bản trong mọi sheet, giữ nguyên định dạng, công thức và ô số.
 - ✨ **Cải thiện UX kéo-thả file**: Vùng drop nhỏ gọn theo chiều ngang, overlay *"Thả file vào đây"* có animation khi kéo file vào, nhấp nháy xanh xác nhận sau khi thả.
 - 🪟 **Chỉ Windows**: Loại bỏ build script cho Mac/Linux — gói cài đặt nay chỉ dành cho Windows.
-- 📦 Tải bản mới: **[ChuongPV_LlmTranslate.zip](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/ChuongPV_LlmTranslate.zip)** (không cần cài Python).
 
 ### Phiên bản trước — [v0.1.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.1.0)
 
@@ -265,12 +270,17 @@ Providers:
 
 ---
 
-## Latest release — [v0.2.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.2.0)
+## Latest release — [v0.3.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.3.0)
+
+- 🔑 **Fixed API Key "NOT SET" badge**: Status badge now updates to "✓ Configured" immediately after saving — no page reload needed.
+- 📊 **Fixed Excel file upload error**: Uploading `.xlsx` / `.xls` files no longer shows *"Cannot determine file type"* — XLSX validator is now properly registered.
+- 📦 Download the new build: **[ChuongPV_LlmTranslate.zip](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/ChuongPV_LlmTranslate.zip)** (no Python required).
+
+### Previous release — [v0.2.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.2.0)
 
 - 📊 **Excel (.xlsx / .xls) support**: Translate all string cells across every sheet, keeping formatting, formulas and numeric cells untouched.
 - ✨ **Drag & drop UX upgrade**: Compact horizontal drop bar, animated *"Drop file here"* overlay while dragging, green flash confirmation after dropping.
 - 🪟 **Windows-only packaging**: Removed Mac/Linux build scripts — the bundled installer now targets Windows exclusively.
-- 📦 Download the new build: **[ChuongPV_LlmTranslate.zip](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/ChuongPV_LlmTranslate.zip)** (no Python required).
 
 ### Previous release — [v0.1.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.1.0)
 

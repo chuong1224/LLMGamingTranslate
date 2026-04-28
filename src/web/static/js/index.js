@@ -493,6 +493,8 @@ window.saveSettings = async () => {
     if (result.success && result.savedToEnv && result.savedToEnv.length > 0) {
         MessageLogger.showMessage(`✅ Đã lưu cài đặt: ${result.savedToEnv.join(', ')}`, 'success');
         MessageLogger.addLog(`💾 Đã lưu vào .env: ${result.savedToEnv.join(', ')}`);
+        // Reload config so API key status badges reflect the newly saved keys
+        await FormManager.loadDefaultConfig();
     } else if (result.success) {
         MessageLogger.showMessage('✅ Đã lưu tùy chọn', 'success');
     } else {

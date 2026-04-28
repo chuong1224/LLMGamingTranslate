@@ -145,6 +145,15 @@ def create_config_blueprint(server_session_id=None):
                 return "***" + key[-4:]  # Show last 4 chars as indicator
             return ""  # Empty = not configured
 
+        # Re-read API keys from os.environ to pick up values saved during this session
+        _gemini_key = os.getenv('GEMINI_API_KEY', GEMINI_API_KEY or '')
+        _openai_key = os.getenv('OPENAI_API_KEY', OPENAI_API_KEY or '')
+        _openrouter_key = os.getenv('OPENROUTER_API_KEY', OPENROUTER_API_KEY or '')
+        _mistral_key = os.getenv('MISTRAL_API_KEY', MISTRAL_API_KEY or '')
+        _deepseek_key = os.getenv('DEEPSEEK_API_KEY', DEEPSEEK_API_KEY or '')
+        _poe_key = os.getenv('POE_API_KEY', POE_API_KEY or '')
+        _nim_key = os.getenv('NIM_API_KEY', NIM_API_KEY or '')
+
         config_response = {
             "api_endpoint": DEFAULT_OLLAMA_API_ENDPOINT,
             "ollama_api_endpoint": OLLAMA_API_ENDPOINT,
@@ -157,20 +166,20 @@ def create_config_blueprint(server_session_id=None):
             "max_attempts": MAX_TRANSLATION_ATTEMPTS,
             "retry_delay": 2,
             "supported_formats": ["txt", "epub", "srt"],
-            "gemini_api_key": mask_api_key(GEMINI_API_KEY),
-            "openai_api_key": mask_api_key(OPENAI_API_KEY),
-            "openrouter_api_key": mask_api_key(OPENROUTER_API_KEY),
-            "mistral_api_key": mask_api_key(MISTRAL_API_KEY),
-            "deepseek_api_key": mask_api_key(DEEPSEEK_API_KEY),
-            "poe_api_key": mask_api_key(POE_API_KEY),
-            "nim_api_key": mask_api_key(NIM_API_KEY),
-            "gemini_api_key_configured": bool(GEMINI_API_KEY),
-            "openai_api_key_configured": bool(OPENAI_API_KEY),
-            "openrouter_api_key_configured": bool(OPENROUTER_API_KEY),
-            "mistral_api_key_configured": bool(MISTRAL_API_KEY),
-            "deepseek_api_key_configured": bool(DEEPSEEK_API_KEY),
-            "poe_api_key_configured": bool(POE_API_KEY),
-            "nim_api_key_configured": bool(NIM_API_KEY),
+            "gemini_api_key": mask_api_key(_gemini_key),
+            "openai_api_key": mask_api_key(_openai_key),
+            "openrouter_api_key": mask_api_key(_openrouter_key),
+            "mistral_api_key": mask_api_key(_mistral_key),
+            "deepseek_api_key": mask_api_key(_deepseek_key),
+            "poe_api_key": mask_api_key(_poe_key),
+            "nim_api_key": mask_api_key(_nim_key),
+            "gemini_api_key_configured": bool(_gemini_key),
+            "openai_api_key_configured": bool(_openai_key),
+            "openrouter_api_key_configured": bool(_openrouter_key),
+            "mistral_api_key_configured": bool(_mistral_key),
+            "deepseek_api_key_configured": bool(_deepseek_key),
+            "poe_api_key_configured": bool(_poe_key),
+            "nim_api_key_configured": bool(_nim_key),
             "output_filename_pattern": OUTPUT_FILENAME_PATTERN
         }
 
@@ -874,6 +883,10 @@ def create_config_blueprint(server_session_id=None):
         with open(env_path, 'w', encoding='utf-8') as f:
             f.writelines(new_lines)
 
+        # Update os.environ so the running process sees the new values immediately
+        for key, value in updates.items():
+            os.environ[key] = value
+
         return True
 
     @bp.route('/api/settings', methods=['POST'])
@@ -945,13 +958,13 @@ def create_config_blueprint(server_session_id=None):
         API keys are masked for security - only indicates if configured.
         """
         return jsonify({
-            "gemini_api_key_configured": bool(GEMINI_API_KEY),
-            "openai_api_key_configured": bool(OPENAI_API_KEY),
-            "openrouter_api_key_configured": bool(OPENROUTER_API_KEY),
-            "mistral_api_key_configured": bool(MISTRAL_API_KEY),
-            "deepseek_api_key_configured": bool(DEEPSEEK_API_KEY),
-            "poe_api_key_configured": bool(POE_API_KEY),
-            "nim_api_key_configured": bool(NIM_API_KEY),
+            "gemini_api_key_configured": bool(os.getenv('GEMINI_API_KEY', GEMINI_API_KEY or '')),
+            "openai_api_key_configured": bool(os.getenv('OPENAI_API_KEY', OPENAI_API_KEY or '')),
+            "openrouter_api_key_configured": bool(os.getenv('OPENROUTER_API_KEY', OPENROUTER_API_KEY or '')),
+            "mistral_api_key_configured": bool(os.getenv('MISTRAL_API_KEY', MISTRAL_API_KEY or '')),
+            "deepseek_api_key_configured": bool(os.getenv('DEEPSEEK_API_KEY', DEEPSEEK_API_KEY or '')),
+            "poe_api_key_configured": bool(os.getenv('POE_API_KEY', POE_API_KEY or '')),
+            "nim_api_key_configured": bool(os.getenv('NIM_API_KEY', NIM_API_KEY or '')),
             "default_model": DEFAULT_MODEL or "",
             "llm_provider": os.getenv('LLM_PROVIDER', 'ollama'),
             "api_endpoint": DEFAULT_OLLAMA_API_ENDPOINT or "",
