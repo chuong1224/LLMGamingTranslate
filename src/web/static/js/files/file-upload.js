@@ -775,8 +775,10 @@ export const FileUpload = {
             // Determine initial source language:
             // - Use detected language if confidence >= 70%
             // - Otherwise use current form value
+            const hasReliableDetection = uploadResult.detected_language &&
+                                         uploadResult.language_confidence >= 0.7;
             let initialSourceLanguage;
-            if (uploadResult.detected_language && uploadResult.language_confidence >= 0.7) {
+            if (hasReliableDetection) {
                 initialSourceLanguage = uploadResult.detected_language;
             } else {
                 initialSourceLanguage = this._getCurrentSourceLanguage();
@@ -808,8 +810,28 @@ export const FileUpload = {
             // Track this as the last uploaded file for language sync
             lastUploadedFileName = file.name;
 
+            // Show success message - replaces the "Đang tải lên..." message
+            const sizeKB = (file.size / 1024).toFixed(2);
+            let successMsg = `✅ Đã tải lên '${file.name}' (${sizeKB} KB)`;
+            if (hasReliableDetection) {
+                const confidencePct = Math.round(uploadResult.language_confidence * 100);
+                successMsg += ` — phát hiện ngôn ngữ: ${uploadResult.detected_language} (${confidencePct}%)`;
+            }
+            MessageLogger.showMessage(successMsg, 'success');
+            MessageLogger.addLog(successMsg);
+
+            // Auto-clear the success banner after 4s so it doesn't linger,
+            // but only if the visible message still refers to this file
+            // (otherwise a newer message has already replaced it).
+            setTimeout(() => {
+                const messagesDiv = DomHelpers.getElement('messages');
+                if (messagesDiv && messagesDiv.textContent.includes(file.name)) {
+                    MessageLogger.showMessage('', '');
+                }
+            }, 4000);
+
             // Auto-update source language field if detected with good confidence
-            if (uploadResult.detected_language && uploadResult.language_confidence >= 0.7) {
+            if (hasReliableDetection) {
                 const sourceLangInput = DomHelpers.getElement('sourceLang');
 
                 if (sourceLangInput) {
@@ -828,7 +850,7 @@ export const FileUpload = {
 
         } catch (error) {
             MessageLogger.showMessage(
-                `Tải lên file '${file.name}' thất bại: ${error.message}`,
+                `❌ Tải lên file '${file.name}' thất bại: ${error.message}`,
                 'error'
             );
         }
