@@ -72,6 +72,8 @@ def create_security_blueprint(output_dir):
                 file_type = "srt"
             elif original_filename.endswith('.docx'):
                 file_type = "docx"
+            elif original_filename.endswith('.xlsx') or original_filename.endswith('.xls'):
+                file_type = "xlsx"
             else:
                 file_type = "txt"
 

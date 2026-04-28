@@ -357,7 +357,7 @@ async def perform_actual_translation(translation_id, config, state_manager, outp
             # Get stats for consolidated message
             final_stats = stats
             stats_summary = ""
-            if config['file_type'] == 'txt' or (config['file_type'] == 'epub' and stats.get('total_chunks', 0) > 0):
+            if config['file_type'] in ('txt', 'xlsx') or (config['file_type'] == 'epub' and stats.get('total_chunks', 0) > 0):
                 completed = final_stats.get('completed_chunks', 0)
                 failed = final_stats.get('failed_chunks', 0)
                 total = final_stats.get('total_chunks', 0)

@@ -18,6 +18,7 @@ from .generic_translator import GenericTranslator
 from .txt_adapter import TxtAdapter
 from .srt_adapter import SrtAdapter
 from .epub_adapter import EpubAdapter
+from .excel_adapter import ExcelAdapter
 from .exceptions import UnsupportedFormatError
 from src.utils.file_detector import detect_file_type, detect_file_type_by_content
 
@@ -213,13 +214,14 @@ async def translate_file(
     adapter_map = {
         'txt': TxtAdapter,
         'srt': SrtAdapter,
+        'xlsx': ExcelAdapter,
         # Note: 'epub' uses legacy path above
         # Note: 'docx' uses legacy path above
     }
 
     adapter_class = adapter_map.get(detected_type)
     if not adapter_class:
-        supported = ', '.join(['txt', 'srt', 'epub', 'docx'])
+        supported = ', '.join(['txt', 'srt', 'epub', 'docx', 'xlsx'])
         raise UnsupportedFormatError(
             f"Unsupported file format: {detected_type}. Supported formats: {supported}"
         )

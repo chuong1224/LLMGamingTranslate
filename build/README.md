@@ -10,9 +10,6 @@ build/
 │   ├── TranslateBook.spec    # PyInstaller spec for Windows
 │   ├── build_exe.bat         # Windows build script
 │   └── install_chatterbox.bat # Chatterbox TTS installer
-├── macos/                 # macOS build files
-│   ├── TranslateBook-macOS.spec # PyInstaller spec for macOS
-│   └── build_macos.sh           # macOS build script
 └── README.md              # This file
 ```
 
@@ -27,20 +24,10 @@ build_exe.bat
 
 The executable will be created at: `../../dist/TranslateBook.exe`
 
-### macOS
-
-```bash
-cd build/macos
-./build_macos.sh
-```
-
-The executable will be created at: `../../dist/TranslateBook`
-
 ## GitHub Workflows
 
-The GitHub Actions workflows automatically use these files:
+The GitHub Actions workflow automatically uses these files:
 - [.github/workflows/build-windows.yml](../../.github/workflows/build-windows.yml)
-- [.github/workflows/build-macos.yml](../../.github/workflows/build-macos.yml)
 
 ## Output
 

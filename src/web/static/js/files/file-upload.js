@@ -89,13 +89,15 @@ export function generateOutputFilename(file, pattern, overrides = {}) {
 /**
  * Detect file type from extension
  * @param {string} filename - Filename
- * @returns {string} File type ('txt', 'epub', 'srt')
+ * @returns {string} File type ('txt', 'epub', 'srt', 'docx', 'xlsx')
  */
 function detectFileType(filename) {
     const extension = filename.split('.').pop().toLowerCase();
 
     if (extension === 'epub') return 'epub';
     if (extension === 'srt') return 'srt';
+    if (extension === 'docx') return 'docx';
+    if (extension === 'xlsx' || extension === 'xls') return 'xlsx';
     return 'txt';
 }
 
@@ -670,21 +672,37 @@ export const FileUpload = {
             return;
         }
 
-        uploadArea.addEventListener('dragover', (e) => {
+        let dragCounter = 0;
+
+        uploadArea.addEventListener('dragenter', (e) => {
             e.preventDefault();
+            dragCounter++;
             DomHelpers.addClass(uploadArea, 'dragging');
         });
 
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
         uploadArea.addEventListener('dragleave', () => {
-            DomHelpers.removeClass(uploadArea, 'dragging');
+            dragCounter--;
+            if (dragCounter <= 0) {
+                dragCounter = 0;
+                DomHelpers.removeClass(uploadArea, 'dragging');
+            }
         });
 
         uploadArea.addEventListener('drop', (e) => {
             e.preventDefault();
+            dragCounter = 0;
             DomHelpers.removeClass(uploadArea, 'dragging');
 
             const files = e.dataTransfer.files;
             if (files.length > 0) {
+                // Brief success flash on the drop zone
+                DomHelpers.addClass(uploadArea, 'drop-success');
+                setTimeout(() => DomHelpers.removeClass(uploadArea, 'drop-success'), 800);
+
                 this.handleFiles(Array.from(files));
             }
         });
@@ -983,7 +1001,7 @@ export const FileUpload = {
 
     /**
      * Get file icon based on file type
-     * @param {string} fileType - File type ('txt', 'epub', 'srt')
+     * @param {string} fileType - File type ('txt', 'epub', 'srt', 'docx', 'xlsx')
      * @returns {string} HTML string for icon
      */
     _getFileIcon(fileType) {
@@ -991,6 +1009,10 @@ export const FileUpload = {
             return this._createGenericEPUBIcon();
         } else if (fileType === 'srt') {
             return '🎬';
+        } else if (fileType === 'xlsx' || fileType === 'xls') {
+            return '📊';
+        } else if (fileType === 'docx') {
+            return '📝';
         }
         return '📄';
     },
