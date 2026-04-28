@@ -39,11 +39,17 @@ Nhà cung cấp:
 
 ---
 
-## Phiên bản mới nhất — [v0.3.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.3.0)
+## Phiên bản mới nhất — [v0.4.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.4.0)
+
+- ⬇️ **Sửa lỗi 404 khi bấm Download**: Nút tải file trong *Quản lý file* không còn báo `Download failed / 404 Not Found`. Nguyên nhân: `send_from_directory` xử lý đường dẫn tương đối thiếu chính xác — đã chuyển sang `send_file` với đường dẫn tuyệt đối.
+- 📝 **Đồng bộ Nhật ký hoạt động với log backend**: Trước đây nhiều dòng log có tiền tố `[file]` bị âm thầm bỏ qua nếu không khớp pattern "important". Đã gỡ bộ lọc đó để nhật ký frontend phản ánh đúng hoạt động backend.
+- ⏳ **Sửa thông báo upload kẹt ở "Đang tải lên..."**: Sau khi upload xong, banner đổi thành `✅ Đã tải lên` và tự ẩn sau 4 giây.
+- 📦 Tải bản mới: **[ChuongPV_LlmTranslate.zip](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/ChuongPV_LlmTranslate.zip)** (không cần cài Python).
+
+### Phiên bản trước — [v0.3.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.3.0)
 
 - 🔑 **Sửa badge Khóa API "NOT SET"**: Badge trạng thái cập nhật ngay thành "✓ Configured" sau khi lưu — không cần tải lại trang.
 - 📊 **Sửa lỗi tải lên file Excel**: Upload file `.xlsx` / `.xls` không còn báo *"Cannot determine file type"* — trình xác thực XLSX được thêm vào đúng chỗ.
-- 📦 Tải bản mới: **[ChuongPV_LlmTranslate.zip](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/ChuongPV_LlmTranslate.zip)** (không cần cài Python).
 
 ### Phiên bản trước — [v0.2.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.2.0)
 
@@ -270,11 +276,17 @@ Providers:
 
 ---
 
-## Latest release — [v0.3.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.3.0)
+## Latest release — [v0.4.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.4.0)
+
+- ⬇️ **Fixed Download 404 error**: The download button in *File Management* no longer fails with `Download failed / 404 Not Found`. Root cause: `send_from_directory` mishandled the relative output dir — switched to `send_file` with an absolute path.
+- 📝 **Activity log now in sync with backend log**: Many `[file]`-prefixed entries were previously dropped unless they matched a narrow "important" pattern. Removed that gate so the frontend log mirrors backend activity.
+- ⏳ **Fixed upload status stuck on "Đang tải lên..."**: After a successful upload the banner now switches to `✅ Đã tải lên` and auto-clears after 4 seconds.
+- 📦 Download the new build: **[ChuongPV_LlmTranslate.zip](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/ChuongPV_LlmTranslate.zip)** (no Python required).
+
+### Previous release — [v0.3.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.3.0)
 
 - 🔑 **Fixed API Key "NOT SET" badge**: Status badge now updates to "✓ Configured" immediately after saving — no page reload needed.
 - 📊 **Fixed Excel file upload error**: Uploading `.xlsx` / `.xls` files no longer shows *"Cannot determine file type"* — XLSX validator is now properly registered.
-- 📦 Download the new build: **[ChuongPV_LlmTranslate.zip](https://github.com/chuong1224/llmgamingtranslate/releases/latest/download/ChuongPV_LlmTranslate.zip)** (no Python required).
 
 ### Previous release — [v0.2.0](https://github.com/chuong1224/llmgamingtranslate/releases/tag/v0.2.0)
 

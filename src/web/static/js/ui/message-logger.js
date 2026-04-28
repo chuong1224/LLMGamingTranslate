@@ -131,10 +131,7 @@ export const MessageLogger = {
                 return;
             }
 
-            // For important messages, create new log entry
-            if (this.isImportantMessage(actualMessage)) {
-                this._createLogEntry(message);
-            }
+            this._createLogEntry(message);
         } else {
             // Messages without file name - always show if they pass the filter
             this._createLogEntry(message);
