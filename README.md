@@ -1,3 +1,19 @@
+<p align="center">
+  <a href="https://github.com/chuong1224/LLMGamingTranslate/releases">
+    <img src="https://img.shields.io/github/v/release/chuong1224/LLMGamingTranslate?color=blue&label=Version" alt="Version">
+  </a>
+  <img src="https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white" alt="Python">
+  <a href="https://github.com/chuong1224/LLMGamingTranslate/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/License-AGPL--3.0-red.svg" alt="License: AGPL-3.0">
+  </a>
+  <a href="https://github.com/chuong1224/LLMGamingTranslate/commits/main">
+    <img src="https://img.shields.io/github/last-commit/chuong1224/LLMGamingTranslate?color=brightgreen" alt="Last commit">
+  </a>
+  <a href="https://github.com/chuong1224/LLMGamingTranslate/stargazers">
+    <img src="https://img.shields.io/github/stars/chuong1224/LLMGamingTranslate?style=social" alt="Stars">
+  </a>
+</p>
+
 <div align="center">
   <h1>Dịch Sách bằng LLM</h1>
 </div>
@@ -128,19 +144,19 @@ Xem [docs/PROVIDERS.md](docs/PROVIDERS.md) để biết hướng dẫn cài đ�
 python translate.py -i book.epub -sl English -tl Vietnamese
 
 # Với OpenRouter
-python translate.py -i book.txt --provider openrouter \
+python translate.py -i book.txt --provider openrouter \\
     --openrouter_api_key YOUR_KEY -m anthropic/claude-sonnet-4 -tl Vietnamese
 
 # Với OpenAI
-python translate.py -i book.txt --provider openai \
+python translate.py -i book.txt --provider openai \\
     --openai_api_key YOUR_KEY -m gpt-4o -tl Vietnamese
 
 # Với Gemini
-python translate.py -i book.txt --provider gemini \
+python translate.py -i book.txt --provider gemini \\
     --gemini_api_key YOUR_KEY -m gemini-2.0-flash -tl Vietnamese
 
 # Với máy chủ tương thích OpenAI cục bộ (llama.cpp, LM Studio, vLLM, v.v.)
-python translate.py -i book.txt --provider openai \
+python translate.py -i book.txt --provider openai \\
     --api_endpoint http://localhost:8080/v1/chat/completions -m your-model -tl Vietnamese
 ```
 
@@ -365,19 +381,19 @@ See [docs/PROVIDERS.md](docs/PROVIDERS.md) for detailed setup instructions.
 python translate.py -i book.epub -sl English -tl Chinese
 
 # With OpenRouter
-python translate.py -i book.txt --provider openrouter \
+python translate.py -i book.txt --provider openrouter \\
     --openrouter_api_key YOUR_KEY -m anthropic/claude-sonnet-4 -tl French
 
 # With OpenAI
-python translate.py -i book.txt --provider openai \
+python translate.py -i book.txt --provider openai \\
     --openai_api_key YOUR_KEY -m gpt-4o -tl French
 
 # With Gemini
-python translate.py -i book.txt --provider gemini \
+python translate.py -i book.txt --provider gemini \\
     --gemini_api_key YOUR_KEY -m gemini-2.0-flash -tl French
 
 # With local OpenAI-compatible server (llama.cpp, LM Studio, vLLM, etc.)
-python translate.py -i book.txt --provider openai \
+python translate.py -i book.txt --provider openai \\
     --api_endpoint http://localhost:8080/v1/chat/completions -m your-model -tl French
 ```
 
